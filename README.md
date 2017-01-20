@@ -21,5 +21,5 @@ The RenderObject represents a 3D model. Ideally there will be a SceneObject that
   
 Shader prorgrams are made from one fragment shader and one Vertex shader. There will be a few of them to swicth between different shaders to apply light, drawing and color.  
   
-The renderer will know how to set the right shaderPrograms active and is a generic way of drawing RenderObjects. I have it put in, because it is a commodity in Game engines. E.g. RenderQueues ect. 
+The renderer will know how to set the right shaderPrograms active and is a generic way of drawing RenderObjects. Additionally it is a commodity in Game engines. E.g. RenderQueues ect. 
 
