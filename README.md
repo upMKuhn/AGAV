@@ -15,7 +15,7 @@ Shader classes know how to communicate with the glShader code. There are three t
      3. Texture shader  
 Further expansion could be lighting shaders.... 
   
-Buffers are the counterpart to the shaders. They know what shader they need and what model they represent. Ergo they apply them selfs onto the shaders.   
+Buffers are the counterpart to the shaders. They know what shader they need, and what model they represent. Ergo they apply them selfs onto the shaders.   
   
 The RenderObject represents a 3D model. Ideally there will be a SceneObject that wraps around a 3D model. This would be a one to many relation.  
   
