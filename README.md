@@ -1,3 +1,3 @@
 # AGAV
 
-OOP Webgl rendering for Applied Computer Graphics And  Vision 
+OOP Webgl rendering framework for Applied Computer Graphics And  Vision 
