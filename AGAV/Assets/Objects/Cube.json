@@ -1,0 +1,54 @@
+﻿{
+  "ObjectName": "Cube",
+  "RenderOptions": {
+    "drawShape":  "TRIANGLE_FAN"
+  },
+  "objectPosition": [ 0, 3, 0, 0.3, 0.3, 0.3],
+   
+  "Vertex": {
+    "ObjectType":  "VERTEX_BUFFER",
+    
+    "bindWith": {
+      "name": "aVertexPosition",
+      "type": "attribute"
+    },
+
+    "position": {
+
+      "array": [
+         1.0,  1.0,  1.0, 
+        -1.0,  1.0,  1.0, 
+        -1.0, -1.0,  1.0, 
+         1.0, -1.0,  1.0,
+         1.0,  1.0, -1.0, 
+        -1.0,  1.0, -1.0,
+        -1.0, -1.0, -1.0, 
+         1.0, -1.0, -1.0
+      ],
+      "itemSize": 3,
+      "numItems": 8,
+      "bufferBinding": "STATIC_DRAW",
+      "bufferType": "ARRAY_BUFFER",
+      "dataType":  "Float32Array"
+    },
+
+    "indices": {
+      "array": [
+		      0, 1, 2,	0, 2, 3, 
+		      4, 6, 5,  4, 7, 6,  
+		      1, 5, 6, 	1, 6, 2,	
+		      0, 3, 7, 	0, 7, 4,	
+		      0, 5, 1, 	0, 4, 5,  
+		      3, 2, 6, 	3, 6, 7
+      ],
+      "itemSize": 1,
+      "numItems": 36,
+      "bufferBinding": "STATIC_DRAW",
+      "bufferType": "ELEMENT_ARRAY_BUFFER",
+      "dataType":  "Uint16Array"
+    }
+  },
+
+  "color": [ 0.0, 1.0, 0.0, 1.0 ]
+
+}

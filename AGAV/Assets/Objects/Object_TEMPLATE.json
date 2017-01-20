@@ -1,0 +1,52 @@
+﻿{
+  "ObjectName": "template",
+  "RenderOptions": {
+    "drawShape": "TRIANGLES"
+  },
+
+  "objectPosition": [0,0,0, 0,0,0]//x,y,z PitchX,HeadingY,RollZ
+
+  "Vertex": {
+    "ObjectType": "VERTEX_BUFFER",
+
+    "bindWith": {
+      "name": "aVertexPosition",
+      "type": "attribute"
+    },
+
+    "position": {
+
+      "array": [
+        // Plane in y=0
+        5.0,
+        0.0,
+        5.0, //v0
+        5.0,
+        0.0,
+        -5.0, //v1
+        -5.0,
+        0.0,
+        -5.0, //v2
+        -5.0,
+        0.0,
+        5.0
+      ], //v3
+      "itemSize": 3,
+      "numItems": 4,
+      "bufferBinding": "STATIC_DRAW",
+      "bufferType": "ARRAY_BUFFER",
+      "dataType": "Float32Array"
+    },
+
+    "indices": {
+      "array": [ 0, 1, 2, 3 ],
+      "itemSize": 1,
+      "numItems": 4,
+      "bufferBinding": "STATIC_DRAW",
+      "bufferType": "ELEMENT_ARRAY_BUFFER",
+      "dataType": "Uint16Array"
+    }
+  },
+    "color": [ 0, 1.0, 0, 0 ]
+  
+}

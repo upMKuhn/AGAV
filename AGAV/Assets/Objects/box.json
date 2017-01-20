@@ -1,0 +1,34 @@
+{
+  "color": [ 0.5, 1.0, 0, 1.0 ],
+  "ObjectName": "Box",
+  "RenderOptions": {
+    "drawShape": "TRIANGLE_STRIP"
+  },
+  "objectPosition": [3,3,3, 0,0,0],
+  "Vertex": {
+    "ObjectType": "VERTEX_BUFFER",
+
+    "bindWith": {
+      "name": "aVertexPosition",
+      "type": "attribute"
+    },
+
+    "position": {
+			"array": [ 0.5 ,0.5 ,0.5 ,-0.5 ,0.5 ,0.5 ,-0.5 ,-0.5 ,0.5 ,0.5 ,-0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,-0.5 ,-0.5 ,0.5 ,0.5 ,-0.5 ,0.5 ,-0.5 ,0.5 ,-0.5 ,-0.5 ,-0.5 ,-0.5 ,-0.5 ,-0.5 ,0.5 ,-0.5 ,0.5 ,0.5 ,-0.5 ,0.5 ,-0.5 ,0.5 ,-0.5 ,-0.5 ,0.5 ,-0.5 ,-0.5 ,-0.5 ,0.5 ,-0.5 ,-0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,-0.5 ,0.5 ,0.5 ,0.5 ,-0.5 ,0.5 ,-0.5 ,-0.5 ,-0.5 ,0.5 ,0.5 ,-0.5 ,-0.5 ,-0.5 ,-0.5 ,-0.5 ,0.5 ,-0.5 ,0.5 ,-0.5]
+      ,"itemSize": 3,
+      "numItems": 24,
+      "bufferBinding": "STATIC_DRAW",
+      "bufferType": "ARRAY_BUFFER",
+      "dataType": "Float32Array"
+    },
+
+    "indices": {
+      "array": [ ],
+      "itemSize": 0,
+      "numItems": 0,
+      "bufferBinding": "STATIC_DRAW",
+      "bufferType": "ELEMENT_ARRAY_BUFFER",
+      "dataType": "Uint16Array"
+    }
+  }
+}

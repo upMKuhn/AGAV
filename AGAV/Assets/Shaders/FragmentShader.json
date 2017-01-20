@@ -1,0 +1,6 @@
+﻿{
+  "src": "Assets/Shaders/src/FragmentShader.txt",
+  "shaderName":  "IGNORE",
+  "shaderClass": { "name": "Shader" },
+  "shaderType":  "FRAGMENT"
+}
