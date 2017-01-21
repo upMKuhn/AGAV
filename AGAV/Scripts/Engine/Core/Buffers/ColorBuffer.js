@@ -3,8 +3,9 @@
         super(model);
         this.model = model.color;
         this.image = image;
-        this.colorVertexAr = model.array;
+        this.colorVertexAr = this.model.array;
         this.colorRGBA = this.model.rgba;
+        this.glColorBuffer = gl.createBuffer();
         this.isValidColorBufferModel(this.model);
         this.glTextureMappingBuffer = gl.createBuffer();
     }
@@ -17,12 +18,13 @@
         if (this.__isUsingRGBA()) {
             colorShader.setVertexColorsRGBA(this.colorRGBA);
         } else {
-            console.error("color Vertex Arrrays not implemented yet");
-            // to do .... lol 
+            this.__makeBuffer();
+            colorShader.setVertexColors(this.glColorBuffer);
         }
-            
         super.applyToShader(colorShader);
     }
+
+    
 
     isValidColorBufferModel(model) {
         var result = true;
@@ -35,6 +37,16 @@
         return result;
     }
 
+    __makeBuffer() {
+        if (!this.glColorBuffer.wasSetup) {
+            var data = WebGlDataTypeFactory.createArrayType("Float32Array", this.colorVertexAr);
+            this.glColorBuffer.data = data;
+            this.glColorBuffer.itemSize = 4;
+            this.glColorBuffer.numItems = this.colorVertexAr.length / this.glColorBuffer.itemSize;
+            this.glColorBuffer.wasSetup = true;
+            this.glColorBuffer.bufferType = gl.ARRAY_BUFFER;
+        }
+    }
 
     __isUsingRGBA() {
         return this.colorVertexAr == undefined

@@ -24,6 +24,8 @@ class DrawShader extends Shader {
     bindPositionBuffer(glBuffer)
     {
         gl.bindBuffer(glBuffer.bufferType, glBuffer);
+        gl.bufferData(glBuffer.bufferType, glBuffer.data, gl.STATIC_DRAW)
+        gl.bindBuffer(glBuffer.bufferType, glBuffer);
         gl.vertexAttribPointer(this.vertexPositionBufferPtr, glBuffer.itemSize, gl.FLOAT, false, 0, 0);
     }
 

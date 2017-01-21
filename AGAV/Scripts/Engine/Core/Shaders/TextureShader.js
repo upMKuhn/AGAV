@@ -35,6 +35,7 @@ class TextureShader extends DrawShader{
 
         gl.bindTexture(gl.TEXTURE_2D, glTextureObj)
         gl.activeTexture(gl.TEXTURE0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
     }
 
