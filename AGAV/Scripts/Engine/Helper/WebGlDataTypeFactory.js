@@ -11,7 +11,7 @@ WebGlDataTypeFactory.createArrayType = function (name, array)
             obj = new Uint16Array(array);
             break;
         default:
-            alert("GL Data type factory: Type not valid " + name)
+            console.error("GL Data type factory: Type not valid " + name)
     }
     return obj;
 }

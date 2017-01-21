@@ -12,7 +12,7 @@
     addShader(shader){
         this.shaderList[shader.name] = shader;
         gl.attachShader(this.glProgram, shader.glShader);
-        if (shader.name == "DEFAULT")
+        if (!shader.name.includes("IGNORE"))
             this.defaultShader = shader;
     }
 

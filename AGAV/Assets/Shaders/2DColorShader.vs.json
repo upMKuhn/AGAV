@@ -1,0 +1,10 @@
+﻿{
+  "src": "Assets/Shaders/src/2DColorShader.vs.txt",
+  "shaderName":  "color",
+  "shaderClass": {
+    "name": "ColorShader2D",
+    "vertexAttributeName": "aVertexPosition",
+    "colorAttributeName": "aVertexColor"
+  },
+  "shaderType":  "VERTEX"
+}

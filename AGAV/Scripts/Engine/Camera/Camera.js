@@ -11,45 +11,30 @@
         this.moveSpeed = 0.01;
     }
 
-
-    applyToModelView(modelViewMatrix) {
-        mat4.lookAt([this.x, this.y, this.z], [0, 0, 0], [0, 1, 0], modelViewMatrix);
-        mat4.rotateX(modelViewMatrix, this.pitch, modelViewMatrix);
-        mat4.rotateY(modelViewMatrix, this.heading, modelViewMatrix);
-        mat4.rotateZ(modelViewMatrix, this.roll, modelViewMatrix);
-        return modelViewMatrix;
+    pitchUp() {
+        this.pitch += this.moveSpeed;
     }
 
-    getViewMatrix() {
-        var viewMatrix = mat4.create();
-        mat4.identity(viewMatrix);
-        mat4.lookAt([0, 0,  0], [0, 0, 0], [0, 1, 0], viewMatrix);
-        mat4.translate(viewMatrix, [this.x, this.y, this.z]);
-        mat4.rotateX(viewMatrix, this.pitch, viewMatrix);
-        mat4.rotateY(viewMatrix, this.heading, viewMatrix);
-        mat4.rotateZ(viewMatrix, this.roll, viewMatrix);
-        return viewMatrix;
+    pitchDown() {
+        this.pitch -= this.moveSpeed;
     }
 
-    getProjectionMatrix() {
-        var projectionMatrix = mat4.create();
-        mat4.perspective(100, gl.viewportWidth / gl.viewportHeight, 5, 0.0, projectionMatrix);
-        return projectionMatrix;
+    headingLeft() {
+        this.heading += this.moveSpeed;
     }
 
-    setMovementSpeed(newSpeed) {
-        this.moveSpeed = newSpeed > 0 ? newSpeed : 0.1;
+    headingRight() {
+        this.heading -= this.moveSpeed;
     }
 
-    moveForward() {
-        console.log("X: "+ this.x + " Y:"+this.y + " Z" + this.z);
-        this.z += this.moveSpeed *10;
+    rollLeft() {
+        this.roll += this.moveSpeed;
     }
 
-    moveBackward() {
-        console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
-        this.z -= this.moveSpeed * 10;
+    rollRight() {
+        this.roll -= this.moveSpeed;
     }
+
 
     moveLeft() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
@@ -73,5 +58,49 @@
 
         this.y -= this.moveSpeed;
     }
+
+    moveForward() {
+        console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
+        this.z += this.moveSpeed * 10;
+    }
+
+    moveBackward() {
+        console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
+        this.z -= this.moveSpeed * 10;
+    }
+
+    getViewMatrix() {
+        var viewMatrix = mat4.create();
+        mat4.identity(viewMatrix);
+        //mat4.lookAt([0, 0,  0], [0, 0, 0], [0, 1, 0], viewMatrix);
+        mat4.translate(viewMatrix, [this.x, this.y, this.z]);
+        mat4.rotateX(viewMatrix, this.pitch, viewMatrix);
+        mat4.rotateY(viewMatrix, this.heading, viewMatrix);
+        mat4.rotateZ(viewMatrix, this.roll, viewMatrix);
+        return viewMatrix;
+    }
+
+    getProjectionMatrix() {
+        var projectionMatrix = mat4.create();
+        mat4.perspective(100, gl.viewportWidth / gl.viewportHeight, 5, 0.0, projectionMatrix);
+        return projectionMatrix;
+    }
+
+    setMovementSpeed(newSpeed) {
+        this.moveSpeed = newSpeed > 0 ? newSpeed : 0.1;
+    }
+
+    applyToModelView(modelViewMatrix) {
+        mat4.lookAt([this.x, this.y, this.z], [0, 0, 0], [0, 1, 0], modelViewMatrix);
+        mat4.rotateX(modelViewMatrix, this.pitch, modelViewMatrix);
+        mat4.rotateY(modelViewMatrix, this.heading, modelViewMatrix);
+        mat4.rotateZ(modelViewMatrix, this.roll, modelViewMatrix);
+        return modelViewMatrix;
+    }
+
+
     
+    
+    
+
 }

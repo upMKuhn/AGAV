@@ -1,52 +1,43 @@
 ﻿{
   "ObjectName": "template",
-  "RenderOptions": {
-    "drawShape": "TRIANGLES"
-  },
-
-  "objectPosition": [0,0,0, 0,0,0]//x,y,z PitchX,HeadingY,RollZ
+  
+  //x,y,z PitchX,HeadingY,RollZ
+  "objectPosition": [0,0,0, 0,0,0],
 
   "Vertex": {
-    "ObjectType": "VERTEX_BUFFER",
+    "class": "ColorBuffer",
 
-    "bindWith": {
-      "name": "aVertexPosition",
-      "type": "attribute"
+    "RenderOptions": {
+      "drawShape": "TRIANGLES",
+      "shader": "colorShader"
+    },
+    
+    //either one
+    "color": {
+      "rgba": [ 0, 1.0, 0, 0 ],
+      "array": []
+    },
+    //or
+    "texture": {
+      "src": "/some.png",
+      "array": [] 
     },
 
     "position": {
-
-      "array": [
-        // Plane in y=0
-        5.0,
-        0.0,
-        5.0, //v0
-        5.0,
-        0.0,
-        -5.0, //v1
-        -5.0,
-        0.0,
-        -5.0, //v2
-        -5.0,
-        0.0,
-        5.0
-      ], //v3
+      "array": [ 5.0, 0.0, 5.0, 5.0, 0.0, -5.0, -5.0, 0.0, -5.0, -5.0, 0.0, 5.0 ], 
       "itemSize": 3,
-      "numItems": 4,
-      "bufferBinding": "STATIC_DRAW",
-      "bufferType": "ARRAY_BUFFER",
-      "dataType": "Float32Array"
+      "numItems": 4
     },
 
     "indices": {
       "array": [ 0, 1, 2, 3 ],
       "itemSize": 1,
-      "numItems": 4,
-      "bufferBinding": "STATIC_DRAW",
-      "bufferType": "ELEMENT_ARRAY_BUFFER",
-      "dataType": "Uint16Array"
+      "numItems": 4
     }
-  },
-    "color": [ 0, 1.0, 0, 0 ]
+  }
+
+  
+
+
   
 }

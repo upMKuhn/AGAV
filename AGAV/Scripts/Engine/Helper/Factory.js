@@ -27,13 +27,22 @@ function makeTypeDatabase()
         __types["EventHandlerCollection"] = EventHandlerCollection;
         __types["AssetLoadQueue"] = AssetLoadQueue;
         __types["AssetLoadQueueItem"] = AssetLoadQueueItem;
-        __types["ShaderProgram"] = ShaderProgram;
+        __types["ShaderProgram"] = ShaderProgram; 
         __types["VertexBuffer"] = VertexBuffer;
-        __types["SceneObject"] = SceneObject;
+        __types["ColorBuffer"] = ColorBuffer;
+        __types["TextureBuffer"] = TextureBuffer;
+        __types["RenderObject"] = RenderObject;
         __types["Shader"] = Shader;
         __types["DrawShader"] = DrawShader;
+        __types["TextureShader"] = TextureShader;
+        __types["ColorShader"] = ColorShader;
+        
+        __types["DrawShader2D"] = DrawShader2D;
+        __types["ColorShader2D"] = ColorShader2D;
+
+
         __types["Camera"] = Camera;
-        __types["Renderer"] = Renderer;
+        __types["RenderQueue"] = RenderQueue;
 
 
 

@@ -1,0 +1,30 @@
+{
+  "ObjectName": "Triangle",
+  "objectPosition": [ 3, 3, 3, 0, 0, 0 ],
+
+  "Vertex": {
+    "class": "ColorBuffer",
+    "color": {
+      "rgba":  [ 1.0, 0.0, 0.0, 1.0 ]
+    },
+    "RenderOptions": 
+    {
+      "drawShape": "TRIANGLES",
+      "shader": "colorShader2D"
+    },
+
+    "position": 
+    {
+      "array": [0.3, 0.4, 0, 0.7, 0.4, 0, 0, 0.5, 0.8, 0, 0],
+      "itemSize": 3,
+      "numItems": 3
+    },
+
+    "indices": 
+    {
+      "array": [ ],
+      "itemSize": 0,
+      "numItems": 0
+    }
+  }
+}

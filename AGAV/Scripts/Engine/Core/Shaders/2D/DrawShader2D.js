@@ -1,12 +1,10 @@
 ﻿/// <reference path="Shader.js" />
 
-class DrawShader extends Shader {
+class DrawShader2D extends Shader {
     constructor(model, onCompiled){
         super(model, onCompiled);
 
         this.vertexPositionBufferPtr = null;
-        this.viewModelMatrixPtr = null;
-        this.projectionMatrixPtr = null;
     }
 
 
@@ -14,8 +12,6 @@ class DrawShader extends Shader {
     { 
         var shaderClass = this.model.shaderClass;
         this.vertexPositionBufferPtr = gl.getAttribLocation(glProgram, shaderClass.vertexAttributeName);
-        this.viewModelMatrixPtr = gl.getUniformLocation(glProgram, shaderClass.viewModelMatrixName);
-        this.projectionMatrixPtr = gl.getUniformLocation(glProgram, shaderClass.projectionMatrixName);
 
         gl.enableVertexAttribArray(this.vertexPositionBufferPtr);
     }
@@ -29,11 +25,9 @@ class DrawShader extends Shader {
 
     setViewModelMatrix(mat4)
     {
-        gl.uniformMatrix4fv(this.viewModelMatrixPtr, false, mat4);
     }
      
     setProjectionMatrix(mat4) {
-        gl.uniformMatrix4fv(this.projectionMatrixPtr, false, mat4);
     }
 
 

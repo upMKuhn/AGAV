@@ -17,7 +17,7 @@
         this.$canvas.mousemove(makeCallback(InputClass, InputClass.onMouseMove));
         this.$canvas.mousedown(makeCallback(InputClass, InputClass.onMouseDown));
         this.$canvas.mouseup(makeCallback(InputClass, InputClass.onMouseUp));
-        this.$canvas.bind("mousewheel", makeCallback(this, this.__onMouseWheelScroll));
+        $(document).bind("mousewheel", makeCallback(this, this.__onMouseWheelScroll));
 
         this.__onWindowResize();
         $(window).resize(makeCallback(this, this.__onWindowResize));

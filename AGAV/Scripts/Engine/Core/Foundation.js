@@ -1,6 +1,6 @@
 ﻿/// <reference path="VertexBuffer.js" />
 /// <reference path="ShaderProgram.js" />
-/// <reference path="SceneObject.js" />
+/// <reference path="RenderObject.js" />
 /// <reference path="Foundation.js" />
 /// <reference path="Factory.js" />
 /// <reference path="AssetLoadQueueItem.js" />
@@ -11,15 +11,15 @@
 if ($ == undefined)
     alert("Jquery was not loaded! Please connect to the internet.");
 
-var Foundation = function (shaderProg, assetLoadQueue, camera, renderer)
+var Foundation = function (shaderProg, assetLoadQueue, camera, renderQueue)
 {
     this.shaderProgam = shaderProg;
     this.assetLoadQueue = assetLoadQueue;
-    this.SceneObjects = {};
+    this.RenderObjects = {};
     this.camera = camera;
-    this.renderer = renderer;
+    this.renderQueue = renderQueue;
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
-    //gl.enable(gl.DEPTH_TEST);
+    gl.enable(gl.DEPTH_TEST);
 }
 
 
@@ -50,16 +50,31 @@ Foundation.prototype.render = function () {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    for (var obj in this.SceneObjects)
+    for (var obj in this.RenderObjects)
     {
-        this.renderer.drawObject(this.SceneObjects[obj], this.camera);
+        this.renderQueue.enqueue(this.RenderObjects[obj]);
     }
+
+    this.renderQueue.drawObjects(this.camera);
 }
+
 
 Foundation.prototype.__onObjectLoaded = function (object)
 {
-    this.SceneObjects[object.ObjectName] = Factory("SceneObject", [object, this.shaderProgam]);
+    var renderObject = Factory("RenderObject", [object]);
+    this.RenderObjects[object.ObjectName] = renderObject;
+    var buffer = Factory(object.Vertex.class, [object.Vertex]);
+    renderObject.setVertexBuffer(buffer);
+    //Load texture image if needed
+    if (object.Vertex.class == "TextureBuffer")
+    {
+        buffer.setImage($('#boxTexture')[0]);
+        //var queueItem = Factory("AssetLoadQueueItem", [object.Vertex.texture.src, makeCallback(buffer, buffer.setImage)]);
+        //this.assetLoadQueue.enqueue(queueItem);
+    }
+
 }
+
 
 Foundation.prototype.__onShaderLoaded = function (object) {
 

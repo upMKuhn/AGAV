@@ -1,0 +1,12 @@
+﻿{
+  "src": "Assets/Shaders/src/ColorShader.vs.txt",
+  "shaderName":  "color",
+  "shaderClass": {
+    "name": "ColorShader",
+    "vertexAttributeName": "aVertexPosition",
+    "colorAttributeName": "aVertexColor",
+    "viewModelMatrixName": "uViewModelMatrix",
+    "projectionMatrixName": "uProjectionMatrix"
+  },
+  "shaderType":  "VERTEX"
+}

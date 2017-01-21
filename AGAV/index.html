@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en-gb">
 <head>
-    <title></title>
+    <title>AGAV</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="Scripts/Utils/glMatrix.js"></script>
@@ -13,16 +13,26 @@
     <script src="Scripts/Engine/Camera/Camera.js"></script>
     <script src="Scripts/Engine/Camera/CameraControl.js"></script>
     <script src="Scripts/Engine/Core/Foundation.js"></script>
-    <script src="Scripts/Engine/Core/Renderer.js"></script>
-    <script src="Scripts/Engine/Core/SceneObject.js"></script>
+    <script src="Scripts/Engine/Core/RenderQueue.js"></script>
+    <script src="Scripts/Engine/Core/RenderObject.js"></script>
+    <script src="Scripts/Engine/Core/MyCanvas.js"></script>
+
     <script src="Scripts/Engine/Core/Shaders/Shader.js"></script>
     <script src="Scripts/Engine/Core/Shaders/DrawShader.js"></script>
+    <script src="Scripts/Engine/Core/Shaders/ColorShader.js"></script>
+    <script src="Scripts/Engine/Core/Shaders/TextureShader.js"></script>
+    <script src="Scripts/Engine/Core/Shaders/2D/DrawShader2D.js"></script>
+    <script src="Scripts/Engine/Core/Shaders/2D/ColorShader2D.js"></script>
     <script src="Scripts/Engine/Core/ShaderProgram.js"></script>
-    <script src="Scripts/Engine/Core/VertexBuffer.js"></script>
-    <script src="Scripts/Engine/Core/MyCanvas.js"></script>
+
+    <script src="Scripts/Engine/Core/Buffers/VertexBuffer.js"></script>
+    <script src="Scripts/Engine/Core/Buffers/ColorBuffer.js"></script>
+    <script src="Scripts/Engine/Core/Buffers/TextureBuffer.js"></script>
+
     <script src="Scripts/Engine/IO/AssetLoadQueue.js"></script>
     <script src="Scripts/Engine/IO/AssetLoadQueueItem.js"></script>
     <script src="Scripts/Engine/IO/Input.js"></script>
+
     <script src="Scripts/Engine/Helper/EventHandlerCollection.js"></script>
     <script src="Scripts/Engine/Helper/Factory.js"></script>
     <script src="Scripts/Engine/Helper/WebGlDataTypeFactory.js"></script>
@@ -30,9 +40,9 @@
 
     <script src="Scripts/Scene.js"></script>
 
-    <meta charset="utf-8" />
 </head>
 <body>
-    <canvas id="myGLCanvas"></canvas>
+    <img id="boxTexture" style="display:none" src="Assets/Textures/earth.jpg"/>
+    <canvas id="myGLCanvas" width="500" height="500"></canvas>
 </body>
 </html>

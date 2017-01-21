@@ -1,16 +1,17 @@
 ﻿{
   "ObjectName": "Floor",
-  "RenderOptions": {
-    "drawShape": "TRIANGLE_FAN"
-  },
-  "objectPosition": [0,0,0, 0,0,0],
   
-  "Vertex": {
-    "ObjectType": "VERTEX_BUFFER",
+  "objectPosition": [0,0,0, 0,0,0],
 
-    "bindWith": {
-      "name": "aVertexPosition",
-      "type": "attribute"
+  "Vertex": {
+    "class": "ColorBuffer",
+    "color": {
+      "rgba": [ 1.0, 1.0, 1.0, 1.0 ]
+    },
+
+    "RenderOptions": {
+      "drawShape": "TRIANGLE_FAN",
+      "shader": "colorShader"
     },
 
     "position": {
@@ -30,21 +31,14 @@
         5.0
       ],
       "itemSize": 3,
-      "numItems": 4,
-      "bufferBinding": "STATIC_DRAW",
-      "bufferType": "ARRAY_BUFFER",
-      "dataType": "Float32Array"
+      "numItems": 4
     },
 
     "indices": {
       "array": [ 0, 1, 2, 3 ],
       "itemSize": 1,
-      "numItems": 4,
-      "bufferBinding": "STATIC_DRAW",
-      "bufferType": "ELEMENT_ARRAY_BUFFER",
-      "dataType": "Uint16Array"
+      "numItems": 4
     }
-  },
-    "color": [ 0.0, 0.0, 0.0, 1.0 ]
+  }
   
 }

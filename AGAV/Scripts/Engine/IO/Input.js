@@ -5,8 +5,18 @@
         this.mouseSubscriber = [];
         this.mouseWithKeyComboSubscriber = [];
 
-        this.activeKeyComboSubscriberCache = [];
+        this.initKeyStates();
     }
+
+    initKeyStates() {
+
+        this.__setKeyState("alt", false);
+        this.__setKeyState("shift", false);
+        this.__setKeyState("leftMouseBtn", false);
+        this.__setKeyState("middleMouseBtn", false);
+        this.__setKeyState("rightMouseBtn", false);
+    }
+
 
     subscribeOnKeyCombo(keyNameArray, callback) {
         this.keyComboSubscriber.push({
@@ -65,13 +75,11 @@
     }
 
     onKeyUp(eventArg) {
-        this.__clearSubscriberKeyComboCache();
         this.__setKeyState(eventArg.key, false);
         this.__onKeyStateChange();
     }
     
     onKeyDown(eventArg) {
-        this.__clearSubscriberKeyComboCache();
         this.__setKeyState(eventArg.key, true);
         this.__onKeyStateChange();
     }
@@ -97,8 +105,6 @@
     //helper
     __getSubscribersWithActiveKeyCombo(subscriberList) {
         var result = [];
-        if (this.__hasSubscriberKeyComboCache())
-            result = this.__getSubscriberKeyComboCache();
 
         for (var i = 0; i < subscriberList.length; i++)
         {
@@ -108,16 +114,19 @@
             }
         }
 
-        this.__setSubscriberKeyComboCache(result);
         return result;
     }
 
-    __isKeyComboActive(keyNameArray) {
+    __isKeyComboActive(keyComboNameArray) {
         var result = true;
-        for (var i = 0; i < keyNameArray.length; i++)
-        {
-            let name = keyNameArray[i];
-            result = result && this.__getKeyState(name);
+        keyComboNameArray = keyComboNameArray.map(function (x) { return x.toLowerCase() });
+
+        for (var key in this.keyStates) {
+            var keyState = this.keyStates[key];
+            var inCombo = keyComboNameArray.indexOf(key) != -1;
+
+            if (keyState || inCombo)
+                result = result && (keyState && inCombo);
         }
         return result;
     }
@@ -132,26 +141,5 @@
         this.keyStates[keyName] = getOrDefault(this.keyStates[keyName], false);
         return this.keyStates[keyName];
     }
-
-
-    //Caching should be inside the subscriber collection 
-    __setSubscriberKeyComboCache(list) {
-        list.isUptoDate = true;
-        this.activeKeyComboSubscriberCache = list;
-    }
-
-    __getSubscriberKeyComboCache(list) {
-        return this.activeKeyComboSubscriberCache;
-    }
-
-    __clearSubscriberKeyComboCache() {
-        this.activeKeyComboSubscriberCache.isUptoDate = false;
-        this.activeKeyComboSubscriberCache.length = 0;
-    }
-
-    __hasSubscriberKeyComboCache() {
-        return this.activeKeyComboSubscriberCache.isUptoDate;
-    }
-
 
 }

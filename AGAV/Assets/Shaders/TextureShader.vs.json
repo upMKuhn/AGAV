@@ -1,10 +1,9 @@
 ﻿{
-  "src": "Assets/Shaders/src/VertexShader.txt",
-  "shaderName":  "DEFAULT",
+  "src": "Assets/Shaders/src/TextureShader.vs.txt",
+  "shaderName":  "texture",
   "shaderClass": {
-    "name": "DrawShader",
+    "name": "TextureShader",
     "vertexAttributeName": "aVertexPosition",
-    "colorAttributeName": "aVertexColor",
     "textureAttributeName": "aTextureCoordinates",
     "viewModelMatrixName": "uViewModelMatrix",
     "projectionMatrixName": "uProjectionMatrix"

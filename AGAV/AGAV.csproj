@@ -66,16 +66,29 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Shaders\src\2DColorShader.fs.txt" />
+    <Content Include="Assets\Shaders\src\ColorShader.fs.txt" />
+    <Content Include="Assets\Shaders\src\2DColorShader.vs.txt" />
+    <Content Include="Assets\Textures\box.jpg" />
+    <Content Include="Assets\Textures\box.png" />
+    <Content Include="Assets\Textures\earth.jpg" />
     <Content Include="packages.config" />
-    <Content Include="Assets\Shaders\src\VertexShader.txt" />
+    <Content Include="Assets\Shaders\src\TextureShader.vs.txt" />
     <Content Include="Assets\Objects\Floor.json" />
     <Content Include="Assets\Objects\Cube.json" />
     <Content Include="Assets\Objects\box.json" />
     <Content Include="Assets\Objects\earth.json" />
+    <Content Include="Assets\Objects\triangle.json" />
+    <Content Include="Assets\Objects\texturedBox.json" />
     <None Include="Assets\Objects\Object_TEMPLATE.json" />
-    <Content Include="Assets\Shaders\FragmentShader.json" />
-    <Content Include="Assets\Shaders\VertexShader.json" />
+    <Content Include="Assets\Shaders\ColorShader.fs.json" />
+    <Content Include="Assets\Shaders\TextureShader.vs.json" />
     <Content Include="Assets\Shaders\Shader_Template.json" />
+    <Content Include="Assets\Shaders\src\ColorShader.vs.txt" />
+    <Content Include="Assets\Shaders\ColorShader.vs.json" />
+    <Content Include="Assets\Shaders\2DColorShader.vs.json" />
+    <Content Include="Assets\Shaders\2DColorShader.fs.json" />
+    <Content Include="Assets\Shaders\TextureShader.fs.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -84,20 +97,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Shaders\src\FragmentShader.txt" />
+    <Content Include="Assets\Shaders\src\TextureShader.fs.txt" />
     <Content Include="index.html" />
     <Content Include="Scripts\Engine\Camera\CameraControl.js" />
+    <Content Include="Scripts\Engine\Core\Buffers\ColorBuffer.js" />
+    <Content Include="Scripts\Engine\Core\Buffers\TextureBuffer.js" />
+    <Content Include="Scripts\Engine\Core\Shaders\2D\ColorShader2D.js" />
+    <Content Include="Scripts\Engine\Core\Shaders\ColorShader.js" />
+    <Content Include="Scripts\Engine\Core\Shaders\2D\DrawShader2D.js" />
+    <Content Include="Scripts\Engine\Core\Shaders\TextureShader.js" />
     <Content Include="Scripts\Engine\IO\AssetLoadQueueItem.js" />
     <Content Include="Scripts\Engine\IO\AssetLoadQueue.js" />
     <Content Include="Scripts\Engine\Camera\Camera.js" />
     <Content Include="Scripts\Engine\Helper\Factory.js" />
     <Content Include="Scripts\Engine\IO\Input.js" />
     <Content Include="Scripts\Engine\Core\MyCanvas.js" />
-    <Content Include="Scripts\Engine\Core\Renderer.js" />
-    <Content Include="Scripts\Engine\Core\SceneObject.js" />
+    <Content Include="Scripts\Engine\Core\RenderQueue.js" />
+    <Content Include="Scripts\Engine\Core\RenderObject.js" />
     <Content Include="Scripts\Engine\Core\Shaders\DrawShader.js" />
     <Content Include="Scripts\Engine\Core\Shaders\Shader.js" />
-    <Content Include="Scripts\Engine\Core\VertexBuffer.js" />
+    <Content Include="Scripts\Engine\Core\Buffers\VertexBuffer.js" />
     <Content Include="Scripts\Engine\Core\Foundation.js" />
     <Content Include="Scripts\Engine\Helper\EventHandlerCollection.js" />
     <Content Include="Scripts\Utils\glMatrix.js" />

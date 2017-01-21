@@ -37,12 +37,13 @@
     onProgramLinked() {
 
     }
-
     
+    draw() {}
+
     __logCompileErrors() {
         if (!gl.getShaderParameter(this.glShader, gl.COMPILE_STATUS)) {
-            alert("Shader compile error");
-            console.log(this.modelFilePath);
+            console.log("Shader compile error in " + this.model.shaderClass.name);
+            console.log(this.model.src);
             console.log(gl.getShaderInfoLog(this.glShader));
             return true;
         }
