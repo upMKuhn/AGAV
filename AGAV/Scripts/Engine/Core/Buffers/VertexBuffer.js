@@ -91,6 +91,9 @@
         } else if (this.debugMode)
         {
             this.____applyDebugModeToBuffer(this.positionBuffer.array, "positionBuffer", 9)
+        } else if (!this.debugMode && this.debugData != undefined)
+        {
+            this[this.debugData.bufferName].array = this.debugData.orgBufferData;
         }
     }
 
