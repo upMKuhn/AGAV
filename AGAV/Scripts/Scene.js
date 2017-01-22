@@ -15,7 +15,7 @@ class main {
         this.assetLoadQueue = new AssetLoadQueue(makeCallback(this, this.onSuccessfullLoadedAssets),
                                                 makeCallback(this, this.onUnssucefullLoadedAssets));
         this.shaderProgram = new ShaderProgram();
-        this.camera = new Camera(0,  0, -0, 0, 0, 0);
+        this.camera = new Camera(0,  0, -8.6, 0, 0, 0);
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
         this.renderQueue = new RenderQueue(this.shaderProgram);
         this.scene = new Foundation(this.shaderProgram, this.assetLoadQueue, this.camera, this.renderQueue);
