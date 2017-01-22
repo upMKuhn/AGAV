@@ -1,4 +1,12 @@
-﻿
+﻿var debugDraw = false;
+
+$(function(){
+    $('#debugDraw').change(function () { 
+        debugDraw = this.checked;
+    });
+})
+
+
 
 function getOrDefault(value, defaultVal)
 {

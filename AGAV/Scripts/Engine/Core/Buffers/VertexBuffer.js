@@ -2,7 +2,7 @@
 
     constructor(data)
     {
-        this.debugMode = false;
+        this.debugMode = debugDraw;
         this.debugSpeed = 4;
         this.positionBuffer = null;
         this.indexBuffer = null;
@@ -84,6 +84,7 @@
 
 
     __applyDebugMode() {
+        this.debugMode = debugDraw;
         if (this.debugMode && this.indexBuffer.array.length > 0)
         {
             this.____applyDebugModeToBuffer(this.indexBuffer.array, "indexBuffer", 3)
