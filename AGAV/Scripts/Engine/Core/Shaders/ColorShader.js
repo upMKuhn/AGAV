@@ -26,7 +26,7 @@ class ColorShader extends DrawShader {
         gl.bindBuffer(glBuffer.bufferType, glBuffer);
         gl.bufferData(glBuffer.bufferType, glBuffer.data, gl.STATIC_DRAW)
         gl.vertexAttribPointer(this.colorBufferPtr, glBuffer.itemSize,
-            gl.FLOAT, gl.FALSE, 6 * Float32Array.BYTES_PER_ELEMENT, 0);
+            gl.FLOAT, gl.FALSE, 4 * Float32Array.BYTES_PER_ELEMENT, 0);
     }
 
 

@@ -15,7 +15,7 @@ class main {
         this.assetLoadQueue = new AssetLoadQueue(makeCallback(this, this.onSuccessfullLoadedAssets),
                                                 makeCallback(this, this.onUnssucefullLoadedAssets));
         this.shaderProgram = new ShaderProgram();
-        this.camera = new Camera(0,  -1.23, -1.6, 0, -3, 0);
+        this.camera = new Camera(0,  0, -0, 0, 0, 0);
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
         this.renderQueue = new RenderQueue(this.shaderProgram);
         this.scene = new Foundation(this.shaderProgram, this.assetLoadQueue, this.camera, this.renderQueue);
@@ -25,14 +25,14 @@ class main {
         //this.scene.loadObject("Assets/Objects/triangle.json");
 
 
-        this.scene.loadShader("Assets/Shaders/ColorShader.fs.json");
-        this.scene.loadShader("Assets/Shaders/ColorShader.vs.json");
+        //this.scene.loadShader("Assets/Shaders/ColorShader.fs.json");
+        //this.scene.loadShader("Assets/Shaders/ColorShader.vs.json");
 
-        //this.scene.loadShader("Assets/Shaders/TextureShader.fs.json");
-        //this.scene.loadShader("Assets/Shaders/TextureShader.vs.json");
+        this.scene.loadShader("Assets/Shaders/TextureShader.fs.json");
+        this.scene.loadShader("Assets/Shaders/TextureShader.vs.json");
 
-        //this.scene.loadObject("Assets/Objects/earth.json");
-        this.scene.loadObject("Assets/Objects/box.json");
+        this.scene.loadObject("Assets/Objects/earth.json");
+        //this.scene.loadObject("Assets/Objects/box.json");
         //this.scene.loadObject("Assets/Objects/texturedBox.json");
         //this.scene.loadObject("Assets/Objects/Floor.json");
         //this.scene.loadObject("Assets/Objects/Cube.json");

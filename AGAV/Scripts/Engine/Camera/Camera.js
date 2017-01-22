@@ -38,25 +38,25 @@
 
     moveLeft() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
-        this.x -= this.moveSpeed;
+        this.x -= this.moveSpeed * 100;
     }
 
     moveRight() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
 
-        this.x += this.moveSpeed;
+        this.x += this.moveSpeed * 10;
     }
 
     moveUp() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
 
-        this.y += this.moveSpeed;
+        this.y += this.moveSpeed * 10;
     }
 
     moveDown() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
 
-        this.y -= this.moveSpeed;
+        this.y -= this.moveSpeed * 100;
     }
 
     moveForward() {
@@ -72,7 +72,7 @@
     getViewMatrix() {
         var viewMatrix = mat4.create();
         mat4.identity(viewMatrix);
-        //mat4.lookAt([0, 0,  0], [0, 0, 0], [0, 1, 0], viewMatrix);
+        mat4.lookAt([0, 0,  0], [0, 0, 0], [0, 1, 0], viewMatrix);
         mat4.translate(viewMatrix, [this.x, this.y, this.z]);
         mat4.rotateX(viewMatrix, this.pitch, viewMatrix);
         mat4.rotateY(viewMatrix, this.heading, viewMatrix);

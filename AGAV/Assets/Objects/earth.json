@@ -5,7 +5,7 @@
   "Vertex": {
     "class": "TextureBuffer",
     "RenderOptions": {
-      "drawShape": "TRIANGLE_FAN",
+      "drawShape": "TRIANGLE_STRIP",
       "shader": "textureShader"
     },
 

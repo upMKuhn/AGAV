@@ -16,6 +16,16 @@ function makeCallback(this_, func)
 }
 
 
+function reverseArray(ar)
+{
+    other = [];
+    for (var i = ar.length; i >= 0; i--)
+    {
+        other.push(ar[i])
+    }
+    return other;
+}
+
 function jsonHelper(obj)
 {
     return JSON.stringify(obj, function (k, v) {

@@ -25,6 +25,10 @@
             var viewModelMatrix = renderObject.applyModelMatrix(viewMatrix);
             var projectionMatrix = camera.getProjectionMatrix();
 
+            //var mvMatrix = mat4.create();
+            //mat4.identity(mvMatrix);
+            //mat4.translate(mvMatrix, [0, 0, -6]);
+            //mat4.multiply(viewMatrix, mvMatrix, mvMatrix);
             shader.setViewModelMatrix(viewMatrix);
             shader.setProjectionMatrix(projectionMatrix);
 

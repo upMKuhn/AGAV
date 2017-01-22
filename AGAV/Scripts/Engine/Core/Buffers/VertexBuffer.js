@@ -3,7 +3,7 @@
     constructor(data)
     {
         this.debugMode = false;
-        this.debugSpeed = 10;
+        this.debugSpeed = 4;
         this.positionBuffer = null;
         this.indexBuffer = null;
         this.RenderOptions = null;
@@ -41,6 +41,7 @@
             this.indexBuffer = model.indices;
             this.RenderOptions = model.RenderOptions;
             this.RenderOptions.drawShape = WebGlDataTypeFactory.Enum(this.RenderOptions.drawShape);
+            //this.indexBuffer.array = reverseArray(this.indexBuffer.array);
         }
     }
 
@@ -58,9 +59,9 @@
             buffers.push(this.glVertexBuffer)
         }
 
-        if (this.indexBuffer.array.length > 0 && buffers.length > 0) {
+        if (this.indexBuffer.array.length > 0 && buffers.length > 0){
             this.__makeBuffers(this.glIndexBuffer, this.indexBuffer, gl.ELEMENT_ARRAY_BUFFER, "Uint16Array");
-            buffers.push(this.glIndexBuffer)
+            buffers.push(this.glIndexBuffer);
         }
 
         return buffers;
