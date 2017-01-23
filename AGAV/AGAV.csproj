@@ -85,6 +85,7 @@
     <Content Include="Assets\Shaders\src\ColorShader.vs.txt" />
     <Content Include="Assets\Shaders\2DColorProgram.json" />
     <Content Include="Assets\Shaders\TextureProgram.json" />
+    <Content Include="Assets\Objects\otherTexturedBox.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,6 +117,7 @@
     <Content Include="Scripts\Engine\Core\Buffers\VertexBuffer.js" />
     <Content Include="Scripts\Engine\Core\Foundation.js" />
     <Content Include="Scripts\Engine\Helper\EventHandlerCollection.js" />
+    <Content Include="Scripts\Engine\IO\TextureLoadQueueItem.js" />
     <Content Include="Scripts\Utils\glMatrix.js" />
     <Content Include="Scripts\Engine\Core\ShaderProgram.js" />
     <Content Include="Scripts\Engine\Helper\WebGlDataTypeFactory.js" />

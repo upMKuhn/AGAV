@@ -75,9 +75,9 @@ class Foundation{
 
         //Load texture image if needed
         if (object.Vertex.class == "TextureBuffer") {
-            buffer.setImage($('#boxTexture')[0]);
-            //var queueItem = Factory("AssetLoadQueueItem", [object.Vertex.texture.src, makeCallback(buffer, buffer.setImage)]);
-            //this.assetLoadQueue.enqueue(queueItem);
+            //buffer.setImage($('#boxTexture')[0]);
+            var queueItem = Factory("TextureLoadQueueItem", [object.Vertex.texture.src, makeCallback(buffer, buffer.setImage)]);
+            this.assetLoadQueue.enqueue(queueItem);
         }
     }
 

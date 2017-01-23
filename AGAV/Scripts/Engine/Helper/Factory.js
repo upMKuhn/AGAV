@@ -27,6 +27,7 @@ function makeTypeDatabase()
         __types["EventHandlerCollection"] = EventHandlerCollection;
         __types["AssetLoadQueue"] = AssetLoadQueue;
         __types["AssetLoadQueueItem"] = AssetLoadQueueItem;
+        __types["TextureLoadQueueItem"] = TextureLoadQueueItem;
         __types["ShaderProgram"] = ShaderProgram; 
         __types["VertexBuffer"] = VertexBuffer;
         __types["ColorBuffer"] = ColorBuffer;
