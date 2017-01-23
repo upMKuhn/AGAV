@@ -80,12 +80,14 @@
     <Content Include="Assets\Objects\earth.json" />
     <Content Include="Assets\Objects\triangle.json" />
     <Content Include="Assets\Objects\texturedBox.json" />
+    <Content Include="Assets\Objects\sphere.json" />
     <None Include="Assets\Objects\Object_TEMPLATE.json" />
     <Content Include="Assets\Shaders\ColorProgram.json" />
     <Content Include="Assets\Shaders\src\ColorShader.vs.txt" />
     <Content Include="Assets\Shaders\2DColorProgram.json" />
     <Content Include="Assets\Shaders\TextureProgram.json" />
     <Content Include="Assets\Objects\otherTexturedBox.json" />
+    <Content Include="Assets\Shaders\LightShader.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -100,6 +102,8 @@
     <Content Include="Scripts\Engine\Camera\CameraControl.js" />
     <Content Include="Scripts\Engine\Core\Buffers\ColorBuffer.js" />
     <Content Include="Scripts\Engine\Core\Buffers\TextureBuffer.js" />
+    <Content Include="Scripts\Engine\Core\MeshGen\MeshGenerator.js" />
+    <Content Include="Scripts\Engine\Core\MeshGen\Sphere.js" />
     <Content Include="Scripts\Engine\Core\Shaders\2D\ColorShader2D.js" />
     <Content Include="Scripts\Engine\Core\Shaders\ColorShader.js" />
     <Content Include="Scripts\Engine\Core\Shaders\2D\DrawShader2D.js" />

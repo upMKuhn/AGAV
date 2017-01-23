@@ -3,13 +3,15 @@
     constructor(data)
     {
         this.debugMode = debugDraw;
-        this.debugSpeed = 10;
+        this.debugSpeed = 5;
+        this.normals = null;
         this.positionBuffer = null;
         this.indexBuffer = null;
         this.RenderOptions = null;
 
         this.glVertexBuffer = gl.createBuffer();
         this.glIndexBuffer = gl.createBuffer();
+        this.model = data;
         if (data != undefined)
             this.applyModel(data);
 
@@ -41,13 +43,15 @@
             this.indexBuffer = model.indices;
             this.RenderOptions = model.RenderOptions;
             this.RenderOptions.drawShape = WebGlDataTypeFactory.Enum(this.RenderOptions.drawShape);
-            //this.indexBuffer.array = reverseArray(this.indexBuffer.array);
+            this.normals = model.normals;
+            this.__generareNormals();
         }
     }
 
     applyToShader(drawShader) {
         var glBuffers = this.getBuffers();
-        drawShader.bindPositionBuffer(glBuffers[0])
+        drawShader.bindPositionBuffer(glBuffers[0]);
+        //drawShader.setNormals(glBuffers[0]);
     }
 
     getBuffers()
@@ -150,7 +154,66 @@
         this.debugData.nthCall++;
     }
 
+    __generareNormals() {
+        if (this.normals != undefined) {
+            return;
+        } else if (this.indexBuffer == undefined || this.indexBuffer.array == undefined || this.indexBuffer.length == 0) {
+            this.__generareNormalsFromVertex();
+        }
 
+        var faces = this.indexBuffer.array;
+        var vertecies = this.positionBuffer.array;
+        var p1,p2,p3
+        this.normals = [];
+
+        for (var i = 0; i < faces.length; i += 3) {
+            p1 = vec3.create([vertecies[faces[i+0]], vertecies[faces[i+0] + 1], vertecies[faces[i+0] + 2]])
+            p2 = vec3.create([vertecies[faces[i+1]], vertecies[faces[i+1] + 1], vertecies[faces[i+1] + 2]])
+            p3 = vec3.create([vertecies[faces[i+2]], vertecies[faces[i+2] + 1], vertecies[faces[i+2] + 2]])
+
+            vec3.subtract(p2, p1, p2);
+            vec3.subtract(p3, p1, p3);
+            p1[0] = p2[0] * p3[0]
+            p1[1] = p2[1] * p3[1]
+            p1[2] = p2[2] * p3[2]
+
+            var length = Math.sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
+
+            this.normals.push(p1[0] / length);
+            this.normals.push(p1[1] / length);
+            this.normals.push(p1[2] / length);
+        }
+    }
+
+    __generareNormalsFromVertex() {
+        if (this.normals != undefined) {
+            return;
+        } 
+        var vertecies = this.positionBuffer.array;
+        var p1, p2, p3;
+
+        for (var i = 0; i < vertecies.length; i += 9) {
+            p1 = vec3.create([vertecies[i + 0], vertecies[i + 1], vertecies[i + 2]])
+            p2 = vec3.create([vertecies[i + 3], vertecies[i + 4], vertecies[i + 5]])
+            p3 = vec3.create([vertecies[i + 6], vertecies[i + 7], vertecies[i + 8]])
+
+            vec3.subtract(p2, p1, p2);
+            vec3.subtract(p3, p1, p3);
+            p1[0] = p2[0] * p3[0]
+            p1[1] = p2[1] * p3[1]
+            p1[2] = p2[2] * p3[2]
+
+            var length = Math.sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
+
+            p1[0] = p1[0] / length;
+            p1[1] = p1[2] / length;
+            p1[2] = p1[2] / length;
+
+            this.normals.push(p1[0] != NaN ? p1[0] : 0);
+            this.normals.push(p1[1] != NaN ? p1[1] : 0);
+            this.normals.push(p1[2] != NaN ? p1[2] : 0);
+        }
+    }
 
 }
 

@@ -93,13 +93,14 @@
 
     applyToModelView(modelViewMatrix) {
         mat4.lookAt([this.x, this.y, this.z], [0, 0, 0], [0, 1, 0], modelViewMatrix);
+        mat4.translate(viewMatrix, [this.x, this.y, this.z]);
         mat4.rotateX(modelViewMatrix, this.pitch, modelViewMatrix);
         mat4.rotateY(modelViewMatrix, this.heading, modelViewMatrix);
         mat4.rotateZ(modelViewMatrix, this.roll, modelViewMatrix);
         return modelViewMatrix;
     }
 
-
+    getEyePositionVe3() { return [this.x, this.y, this.z]; }
     
     
     

@@ -1,8 +1,7 @@
 ﻿class ColorBuffer extends VertexBuffer {
-    constructor(model, image) {
+    constructor(model) {
         super(model);
         this.model = model.color;
-        this.image = image;
         this.colorVertexAr = this.model.array;
         this.colorRGBA = this.model.rgba;
         this.glColorBuffer = gl.createBuffer();
@@ -10,11 +9,7 @@
         this.glTextureMappingBuffer = gl.createBuffer();
         this.shaderProgramName = getOrDefault(model.shaderProgramName, "rgba_color");
     }
-
-    setImage(image) {
-        this.image = image;
-    }
-
+    
     applyToShader(colorShader) {
         if (this.__isUsingRGBA()) {
             colorShader.setVertexColorsRGBA(this.colorRGBA);
@@ -24,8 +19,6 @@
         }
         super.applyToShader(colorShader);
     }
-
-    
 
     isValidColorBufferModel(model) {
         var result = true;

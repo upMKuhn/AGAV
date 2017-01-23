@@ -57,6 +57,16 @@ class Foundation{
         }
     }
 
+    addObject(renderObject) {
+        this.RenderObjects[renderObject.ObjectName] = renderObject;
+        //Load texture image if needed
+        if (renderObject.vertexBuffer instanceof TextureBuffer) {
+            var buffer = renderObject.getVertexBuffer();
+            var queueItem = Factory("TextureLoadQueueItem", [buffer.model.src, makeCallback(buffer, buffer.setImage)]);
+            this.assetLoadQueue.enqueue(queueItem);
+        }
+    }
+
     render() {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -69,16 +79,9 @@ class Foundation{
 
     __onObjectLoaded(object) {
         var renderObject = Factory("RenderObject", [object]);
-        this.RenderObjects[object.ObjectName] = renderObject;
         var buffer = Factory(object.Vertex.class, [object.Vertex]);
         renderObject.setVertexBuffer(buffer);
-
-        //Load texture image if needed
-        if (object.Vertex.class == "TextureBuffer") {
-            //buffer.setImage($('#boxTexture')[0]);
-            var queueItem = Factory("TextureLoadQueueItem", [object.Vertex.texture.src, makeCallback(buffer, buffer.setImage)]);
-            this.assetLoadQueue.enqueue(queueItem);
-        }
+        this.addObject(renderObject);
     }
 
     __onProgramLoaded(shaderProgramModel) {
