@@ -11,7 +11,7 @@
       "shader": "colorShader"
     },
     "texture": {
-      "src": "/Assets/Textures/box.jpg",
+      "src": "Assets/Textures/box.jpg",
       "array": [ 0, 0,0, 1,1, 1,1, 0,0, 0,1, 0,1, 1,0, 1,1, 1,0, 1,0, 0,1, 0, 1, 1,1, 0, 0, 0,0, 1,0, 0,0, 1, 1, 1, 1, 0, 1, 1,1, 0,0, 0, 0, 1]
     },
     "position": 
