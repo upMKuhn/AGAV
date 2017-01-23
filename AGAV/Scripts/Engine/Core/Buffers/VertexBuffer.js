@@ -3,7 +3,7 @@
     constructor(data)
     {
         this.debugMode = debugDraw;
-        this.debugSpeed = 4;
+        this.debugSpeed = 10;
         this.positionBuffer = null;
         this.indexBuffer = null;
         this.RenderOptions = null;

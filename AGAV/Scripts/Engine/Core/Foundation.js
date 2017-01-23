@@ -50,8 +50,8 @@ Foundation.prototype.render = function () {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.enable(gl.DEPTH_TEST);
-    gl.depthFunc(gl.LESS);
-    gl.disable(gl.BLEND);
+    //gl.enable(gl.CULL_FACE);
+    //gl.cullFace(gl.BACK);
     for (var obj in this.RenderObjects)
     {
         this.renderQueue.enqueue(this.RenderObjects[obj]);

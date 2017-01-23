@@ -25,16 +25,16 @@ class main {
         //this.scene.loadObject("Assets/Objects/triangle.json");
 
 
-        //this.scene.loadShader("Assets/Shaders/ColorShader.fs.json");
-        //this.scene.loadShader("Assets/Shaders/ColorShader.vs.json");
+        this.scene.loadShader("Assets/Shaders/ColorShader.fs.json");
+        this.scene.loadShader("Assets/Shaders/ColorShader.vs.json");
 
-        this.scene.loadShader("Assets/Shaders/TextureShader.fs.json");
-        this.scene.loadShader("Assets/Shaders/TextureShader.vs.json");
+        //this.scene.loadShader("Assets/Shaders/TextureShader.fs.json");
+        //this.scene.loadShader("Assets/Shaders/TextureShader.vs.json");
 
-        this.scene.loadObject("Assets/Objects/earth.json");
-        //this.scene.loadObject("Assets/Objects/box.json");
+        //this.scene.loadObject("Assets/Objects/earth.json");
+        this.scene.loadObject("Assets/Objects/box.json");
         //this.scene.loadObject("Assets/Objects/texturedBox.json");
-        //this.scene.loadObject("Assets/Objects/Floor.json");
+        this.scene.loadObject("Assets/Objects/Floor.json");
         //this.scene.loadObject("Assets/Objects/Cube.json");
 
         this.assetLoadQueue.start();

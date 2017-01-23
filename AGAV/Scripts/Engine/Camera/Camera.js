@@ -72,7 +72,7 @@
     getViewMatrix() {
         var viewMatrix = mat4.create();
         mat4.identity(viewMatrix);
-        mat4.lookAt([0, 0,  0], [0, 0, 0], [0, 1, 0], viewMatrix);
+        mat4.lookAt(viewMatrix, [this.x, this.y, this.z], [0, 0, 0], [0, 1, 0]);
         mat4.translate(viewMatrix, [this.x, this.y, this.z]);
         mat4.rotateX(viewMatrix, this.pitch, viewMatrix);
         mat4.rotateY(viewMatrix, this.heading, viewMatrix);
@@ -82,7 +82,8 @@
 
     getProjectionMatrix() {
         var projectionMatrix = mat4.create();
-        mat4.perspective(100, gl.viewportWidth / gl.viewportHeight, 5, 0.0, projectionMatrix);
+        mat4.perspective(90, gl.viewportWidth / gl.viewportHeight, 0.9, 0.0, projectionMatrix);
+        mat4.perspective(60, gl.viewportWidth / gl.viewportHeight,0.1, 100.0, projectionMatrix)
         return projectionMatrix;
     }
 
