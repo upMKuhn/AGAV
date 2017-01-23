@@ -1,7 +1,0 @@
-﻿{
-  "src": "Assets/Shaders/src/file.txt",
-  "attributes": [ "aAttribute" ],
-  "uniforms": [ "uMVMatrix", "uPMatrix" ],
-  "shaderClass": "Shader",
-  "shaderType":  "VERTEX"
-}

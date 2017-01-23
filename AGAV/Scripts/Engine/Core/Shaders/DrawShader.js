@@ -10,12 +10,12 @@ class DrawShader extends Shader {
     }
 
 
-    onProgramLinked(glProgram)
+    onProgramLinked(program)
     { 
         var shaderClass = this.model.shaderClass;
-        this.vertexPositionBufferPtr = gl.getAttribLocation(glProgram, shaderClass.vertexAttributeName);
-        this.viewModelMatrixPtr = gl.getUniformLocation(glProgram, shaderClass.viewModelMatrixName);
-        this.projectionMatrixPtr = gl.getUniformLocation(glProgram, shaderClass.projectionMatrixName);
+        this.vertexPositionBufferPtr = gl.getAttribLocation(program.glProgram, shaderClass.vertexAttributeName);
+        this.viewModelMatrixPtr = gl.getUniformLocation(program.glProgram, shaderClass.viewModelMatrixName);
+        this.projectionMatrixPtr = gl.getUniformLocation(program.glProgram, shaderClass.projectionMatrixName);
 
         gl.enableVertexAttribArray(this.vertexPositionBufferPtr);
     }

@@ -9,9 +9,9 @@ class TextureShader extends DrawShader{
         this.textureAttributeName = model.shaderClass.textureAttributeName;
     }
 
-    onProgramLinked(glProgram) {
-        super.onProgramLinked(glProgram);
-        this.textureBufferPtr = gl.getAttribLocation(glProgram, this.textureAttributeName);
+    onProgramLinked(program) {
+        super.onProgramLinked(program);
+        this.textureBufferPtr = gl.getAttribLocation(program.glProgram, this.textureAttributeName);
         gl.enableVertexAttribArray(this.textureBufferPtr);
     }
 

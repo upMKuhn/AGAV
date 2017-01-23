@@ -9,9 +9,9 @@ class ColorShader extends DrawShader {
     }
 
 
-    onProgramLinked(glProgram) {
-        super.onProgramLinked(glProgram);
-        this.colorBufferPtr = gl.getAttribLocation(glProgram, this.colorAttributeName);
+    onProgramLinked(program) {
+        super.onProgramLinked(program);
+        this.colorBufferPtr = gl.getAttribLocation(program.glProgram, this.colorAttributeName);
         gl.enableVertexAttribArray(this.colorBufferPtr);
     }
 

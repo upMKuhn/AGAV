@@ -1,6 +1,0 @@
-﻿{
-  "src": "Assets/Shaders/src/2DColorShader.fs.txt",
-  "shaderName":  "IGNORE",
-  "shaderClass": { "name": "Shader" },
-  "shaderType":  "FRAGMENT"
-}

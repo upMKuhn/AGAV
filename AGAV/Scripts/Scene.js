@@ -14,27 +14,18 @@ class main {
         this.myCanvas = new MyCanvas("myGLCanvas", this.input);
         this.assetLoadQueue = new AssetLoadQueue(makeCallback(this, this.onSuccessfullLoadedAssets),
                                                 makeCallback(this, this.onUnssucefullLoadedAssets));
-        this.shaderProgram = new ShaderProgram();
         this.camera = new Camera(0,  0, -8.6, 0, 0, 0);
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
-        this.renderQueue = new RenderQueue(this.shaderProgram);
-        this.scene = new Foundation(this.shaderProgram, this.assetLoadQueue, this.camera, this.renderQueue);
+        this.scene = new Foundation(this.assetLoadQueue, this.camera, this.renderQueue);
 
-        //this.scene.loadShader("Assets/Shaders/2DColorShader.fs.json");
-        //this.scene.loadShader("Assets/Shaders/2DColorShader.vs.json");
-        //this.scene.loadObject("Assets/Objects/triangle.json");
+        this.scene.loadProgram("Assets/Shaders/2DColorProgram.json");
+        this.scene.loadProgram("Assets/Shaders/ColorProgram.json");
+        this.scene.loadProgram("Assets/Shaders/TextureProgram.json");
 
-
-        //this.scene.loadShader("Assets/Shaders/ColorShader.fs.json");
-        //this.scene.loadShader("Assets/Shaders/ColorShader.vs.json");
-
-        this.scene.loadShader("Assets/Shaders/TextureShader.fs.json");
-        this.scene.loadShader("Assets/Shaders/TextureShader.vs.json");
-
-        this.scene.loadObject("Assets/Objects/earth.json");
-        //this.scene.loadObject("Assets/Objects/box.json");
-        //this.scene.loadObject("Assets/Objects/texturedBox.json");
-        //this.scene.loadObject("Assets/Objects/Floor.json");
+        //this.scene.loadObject("Assets/Objects/earth.json");
+        this.scene.loadObject("Assets/Objects/box.json");
+        this.scene.loadObject("Assets/Objects/texturedBox.json");
+        this.scene.loadObject("Assets/Objects/Floor.json");
         //this.scene.loadObject("Assets/Objects/Cube.json");
 
         this.assetLoadQueue.start();
@@ -43,13 +34,10 @@ class main {
     onSuccessfullLoadedAssets()
     {
         console.log("All assets loaded :)");
-        this.shaderProgram.linkAndActivateGlProgram(
-            makeCallback(this, this.onSuccessfullLinkedProgram),
-            makeCallback(this, this.onLinkerErrors)
-        );
+        this.scene.callbackWhenInitalized(makeCallback(this,this.onInitalized));
     }
 
-    onSuccessfullLinkedProgram()
+    onInitalized()
     {
         gl.clearColor(0.8, 0.8, 0.8, 1.0);
         gl.enable(gl.DEPTH_TEST);

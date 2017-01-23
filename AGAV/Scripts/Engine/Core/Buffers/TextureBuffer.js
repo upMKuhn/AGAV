@@ -7,6 +7,7 @@
         this.isValidTextureBufferModel(this.model);
         this.glTexture = gl.createTexture();
         this.glTextureMappingBuffer = gl.createBuffer();
+        this.shaderProgramName = getOrDefault(model.shaderProgramName, "texture");
     }
 
     getGlTexture() { return this.glTexture; }

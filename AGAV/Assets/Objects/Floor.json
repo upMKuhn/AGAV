@@ -5,6 +5,7 @@
 
   "Vertex": {
     "class": "ColorBuffer",
+    "shaderProgramName":  "rgba_color",
     "color": {
       "rgba": [ 1.0, 1.0, 1.0, 1.0 ]
     },

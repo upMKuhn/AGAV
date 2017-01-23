@@ -1,9 +1,10 @@
 {
   "ObjectName": "Box",
-  "objectPosition": [ 0, 1, 0, 0, 1, 0 ],
+  "objectPosition": [ 2, 1, 0, 0, 1, 0 ],
 
   "Vertex": {
     "class": "ColorBuffer",
+    "shaderProgramName":  "rgba_color",
     "color": {
       "array": [
         0.0,  0.0,  0.0,  1.0,    

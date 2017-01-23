@@ -1,0 +1,23 @@
+﻿{
+  "name": "texture",
+
+  "fragmentShader": {
+    "src": "Assets/Shaders/src/TextureShader.fs.txt",
+    "shaderName": "IGNORE",
+    "shaderClass": { "name": "Shader" },
+    "shaderType": "FRAGMENT"
+  },
+
+  "vertexShader": {
+      "src": "Assets/Shaders/src/TextureShader.vs.txt",
+      "shaderName":  "texture",
+      "shaderType":  "VERTEX",
+      "shaderClass": {
+        "name": "TextureShader",
+        "vertexAttributeName": "aVertexPosition",
+        "textureAttributeName": "aTextureCoordinates",
+        "viewModelMatrixName": "uViewModelMatrix",
+        "projectionMatrixName": "uProjectionMatrix"
+      }
+  }
+}

@@ -4,6 +4,7 @@
 
   "Vertex": {
     "class": "TextureBuffer",
+    "shaderProgramName":  "texture",
     "RenderOptions": {
       "drawShape": "TRIANGLE_STRIP",
       "shader": "textureShader"

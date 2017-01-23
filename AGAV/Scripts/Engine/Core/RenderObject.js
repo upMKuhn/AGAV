@@ -4,8 +4,9 @@
 class RenderObject {
     constructor(model, vertexBuffer)
     {
-        this.objectName = model.ObjectName;
         this.model = model;
+        this.shaderProgramName = model;
+        this.objectName = model.ObjectName;
         this.vertexBuffer = vertexBuffer;
         this.objectPosition = model.objectPosition;
     }

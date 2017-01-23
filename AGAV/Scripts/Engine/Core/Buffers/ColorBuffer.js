@@ -8,6 +8,7 @@
         this.glColorBuffer = gl.createBuffer();
         this.isValidColorBufferModel(this.model);
         this.glTextureMappingBuffer = gl.createBuffer();
+        this.shaderProgramName = getOrDefault(model.shaderProgramName, "rgba_color");
     }
 
     setImage(image) {

@@ -1,0 +1,21 @@
+﻿{
+  "name": "2D_color",
+
+  "fragmentShader": {
+    "src": "Assets/Shaders/src/2DColorShader.fs.txt",
+    "shaderName": "IGNORE",
+    "shaderClass": { "name": "Shader" },
+    "shaderType": "FRAGMENT"
+  },
+
+  "vertexShader": {
+    "src": "Assets/Shaders/src/2DColorShader.vs.txt",
+    "shaderName": "color",
+    "shaderType": "VERTEX",
+    "shaderClass": {
+      "name": "ColorShader2D",
+      "vertexAttributeName": "aVertexPosition",
+      "colorAttributeName": "aVertexColor"
+    }
+  }
+}

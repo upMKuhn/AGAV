@@ -8,10 +8,10 @@ class DrawShader2D extends Shader {
     }
 
 
-    onProgramLinked(glProgram)
+    onProgramLinked(program)
     { 
         var shaderClass = this.model.shaderClass;
-        this.vertexPositionBufferPtr = gl.getAttribLocation(glProgram, shaderClass.vertexAttributeName);
+        this.vertexPositionBufferPtr = gl.getAttribLocation(program.glProgram, shaderClass.vertexAttributeName);
 
         gl.enableVertexAttribArray(this.vertexPositionBufferPtr);
     }

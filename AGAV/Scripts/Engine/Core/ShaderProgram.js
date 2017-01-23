@@ -1,36 +1,46 @@
 ﻿class ShaderProgram {
 
-    constructor()
+    constructor(name)
     {
-        this.shaderList = {};
+        this.name = name;
         this.glProgram = gl.createProgram();
-        this.defaultShader = null;
+        this.vertexShader = null;
+        this.fragShader = null;
+        this.isLinked = false;
         this.onProgramLinked = Factory("EventHandlerCollection");
     }
 
+    getShader() { return this.vertexShader; }
+
+    activate() { gl.useProgram(this.glProgram)}
 
     addShader(shader){
-        this.shaderList[shader.name] = shader;
         gl.attachShader(this.glProgram, shader.glShader);
-        if (!shader.name.includes("IGNORE"))
-            this.defaultShader = shader;
+        if (shader.type.toUpperCase().includes("VERTEX"))
+            this.vertexShader = shader;
+        else
+            this.fragShader = shader;
+
+        if (this.vertexShader != null && this.fragShader != null)
+            this.linkGlProgram();
     }
 
     subscripeOnProgramLinked(callback) {
         this.onProgramLinked.add(callback);
     }
 
-    getDefaultShader() { return this.defaultShader; }
-
-    linkAndActivateGlProgram(onSuccessCallback, onErrorCallBack)
+    linkGlProgram(onSuccessCallback, onErrorCallBack)
     {
         gl.linkProgram(this.glProgram);
         if (!this.__hadLinkerErrors()) {
-            gl.useProgram(this.glProgram);
-            this.onProgramLinked.raise(this.glProgram);
+            gl.useProgram(this.glProgram)
+            this.isLinked = true;
+            this.onProgramLinked.raise(this);
             getOrDefault(onSuccessCallback, function () { })();
         } else {
-            getOrDefault(onErrorCallBack, function () { })();
+            getOrDefault(onErrorCallBack, function () {
+                alert("Shader program: "+this.name + " had linking issues");
+            })();
         }
     }
 

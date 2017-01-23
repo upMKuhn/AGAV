@@ -1,10 +1,9 @@
 ﻿class Shader {
     constructor(model, onCompiled){
-        this.type = "";
+        this.type = model.shaderType;
         this.model = model;
         this.glShader = null;
         this.sourceCode = "";
-        this.ShaderType = "GENERIC";
         this.name = model.shaderName
 
         
