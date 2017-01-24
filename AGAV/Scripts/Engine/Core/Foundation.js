@@ -58,7 +58,7 @@ class Foundation{
     }
 
     addObject(renderObject) {
-        this.RenderObjects[renderObject.ObjectName] = renderObject;
+        this.RenderObjects[renderObject.objectName] = renderObject;
         //Load texture image if needed
         if (renderObject.vertexBuffer instanceof TextureBuffer) {
             var buffer = renderObject.getVertexBuffer();

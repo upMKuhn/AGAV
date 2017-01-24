@@ -18,9 +18,15 @@ function makeSphere(radius, numParallels, numMeridians)
         for (var m = 0; m < numMeridians+1; m++) {
             var meridian = 2.0 * Math.PI * m / numMeridians
             var cartesian = sphericalToCartesian(radius, meridian, parallel);
+            
             vertecies.push(cartesian);
-            normals.push(vec3.normalize(cartesian));
-            texture.push(meridian, parallel - 1);
+            normals.push(vec3.normalize(vec3.create(cartesian)));
+
+            //UV
+            //var normal = vec3.normalize(vec3.create(cartesian));
+            //var u = Math.atan2(n[0], n[2] / (2 * Math.PI));
+
+            texture.push(meridian, parallel);
             row.push(index++);
         }
         grid.push(row);
@@ -54,12 +60,12 @@ function makeSphere(radius, numParallels, numMeridians)
 }
 
 
-function sphericalToCartesian(radius, elevation, azimuth)
+function sphericalToCartesian(radius, azimuth, elevation)
 {
-    var x = -radius * Math.cos(elevation) * Math.cos(azimuth)
-    var y = radius * Math.cos(elevation) * Math.sin(azimuth)
-    var z = radius * Math.sin(elevation)
-    return [x, y, z];
+    var x = radius * Math.sin(elevation) * Math.cos(azimuth)
+    var y = radius * Math.sin(elevation) * Math.sin(azimuth)
+    var z = radius * Math.cos(elevation)
+    return [x , y , z];
 }
 
 

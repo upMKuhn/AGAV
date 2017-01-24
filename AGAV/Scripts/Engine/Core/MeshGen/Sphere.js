@@ -8,7 +8,6 @@ class Sphere extends RenderObject {
             "shaderProgramName": "rgba_color",
             "RenderOptions": {
                 "drawShape": "TRIANGLE_STRIP",
-                "shader": "colorShader",
             },
         };
 
@@ -25,7 +24,12 @@ class Sphere extends RenderObject {
         sphereModel.color = {
             array: []
         }
-        var buffer = Factory("ColorBuffer", [sphereModel]);
+        sphereModel.texture = {
+            array: mesh.texture,
+            "src": "/Assets/Textures/earth.jpg",
+        }
+
+        var buffer = Factory(sphereModel.class, [sphereModel]);
         var renderObjModel = {
             "ObjectName": objectName,
             "objectPosition": [0, 0, 0, 0, 0, 0],

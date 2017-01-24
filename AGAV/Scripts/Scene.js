@@ -24,13 +24,13 @@ class main {
 
         //this.scene.loadObject("Assets/Objects/earth.json");
         //this.scene.loadObject("Assets/Objects/sphere.json");
-        //this.scene.loadObject("Assets/Objects/box.json");
+        this.scene.loadObject("Assets/Objects/box.json");
         //this.scene.loadObject("Assets/Objects/texturedBox.json");
         //this.scene.loadObject("Assets/Objects/otherTexturedBox.json");
         //this.scene.loadObject("Assets/Objects/Floor.json");
         //this.scene.loadObject("Assets/Objects/Cube.json");
 
-        var sp = new Sphere("sphere2", 5, 18, 21);
+        var sp = new Sphere("sphere2", 5, 48, 20);
         this.scene.addObject(sp)
 
         this.assetLoadQueue.start();
