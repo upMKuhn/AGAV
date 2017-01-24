@@ -4,8 +4,8 @@ class Sphere extends RenderObject {
     {
         var mesh = makeSphere(radius, numParallels, numMeridians)
         var sphereModel = {
-            "class": "ColorBuffer",
-            "shaderProgramName": "rgba_color",
+            "class": "TextureBuffer",
+            "shaderProgramName": "texture",
             "RenderOptions": {
                 "drawShape": "TRIANGLE_STRIP",
             },
@@ -32,11 +32,11 @@ class Sphere extends RenderObject {
         var buffer = Factory(sphereModel.class, [sphereModel]);
         var renderObjModel = {
             "ObjectName": objectName,
-            "objectPosition": [0, 0, 0, 0, 0, 0],
+            "objectPosition": [0, 0, 0, 0.2, 3, 0],
             "Vertex": sphereModel
         }
         super(renderObjModel, buffer);
-        this.generateRGBA(sphereModel);
+        //this.generateRGBA(sphereModel);
 
     }
 

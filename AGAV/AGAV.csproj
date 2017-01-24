@@ -100,7 +100,10 @@
     <Content Include="index.html" />
     <Content Include="Scripts\Engine\Camera\FPSCameraControl.js" />
     <Content Include="Scripts\Engine\Camera\CameraControl.js" />
+    <Content Include="Scripts\Engine\Core\Buffers\Debugger\DebuggerNullObject.js" />
     <Content Include="Scripts\Engine\Core\Buffers\ColorBuffer.js" />
+    <Content Include="Scripts\Engine\Core\Buffers\Debugger\VertexDebugger.js" />
+    <Content Include="Scripts\Engine\Core\Buffers\Debugger\TextureDebugger.js" />
     <Content Include="Scripts\Engine\Core\Buffers\TextureBuffer.js" />
     <Content Include="Scripts\Engine\Core\MeshGen\MeshGenerator.js" />
     <Content Include="Scripts\Engine\Core\MeshGen\Sphere.js" />

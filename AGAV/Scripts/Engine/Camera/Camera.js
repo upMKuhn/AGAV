@@ -38,7 +38,7 @@
 
     moveLeft() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
-        this.x -= this.moveSpeed * 100;
+        this.x -= this.moveSpeed *10;
     }
 
     moveRight() {
@@ -56,7 +56,7 @@
     moveDown() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
 
-        this.y -= this.moveSpeed * 100;
+        this.y -= this.moveSpeed * 10;
     }
 
     moveForward() {

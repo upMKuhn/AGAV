@@ -43,6 +43,11 @@
     <script src="Scripts/Engine/Core/MeshGen/Sphere.js"></script>
 
 
+    <script src="Scripts/Engine/Core/Buffers/Debugger/DebuggerNullObject.js"></script>
+    <script src="Scripts/Engine/Core/Buffers/Debugger/VertexDebugger.js"></script>
+    <script src="Scripts/Engine/Core/Buffers/Debugger/TextureDebugger.js"></script>
+
+
     <script src="Scripts/Scene.js"></script>
 
 </head>
@@ -50,7 +55,12 @@
     <img id="boxTexture" style="display:none" src="Assets/Textures/box.jpg"/>
     <div class="menu">
         <ul>
-            <li>debug drawing <input id="debugDraw" type="checkbox"/></li>
+            <li>debug drawing <input id="debugMode" type="checkbox" /></li>
+            <li><button id="backBtn">Back one</button></li>
+            <li><button id="pauseBtn">pause/resume</button></li>
+            <li><button id="nextBtn">next</button></li>
+            <li><label>U:</label><input id="u_input" type="text" style="width:100px"></li>
+            <li><label>V:</label><input id="v_input" type="text" style="width:100px"></li>
         </ul>
     </div>
     <canvas id="myGLCanvas" width="500" height="500"></canvas>
