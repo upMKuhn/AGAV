@@ -26,7 +26,7 @@ class Sphere extends RenderObject {
         }
         sphereModel.texture = {
             array: mesh.texture,
-            "src": "/Assets/Textures/earth.jpg",
+            "src": "Assets/Textures/earth.jpg",
         }
 
         var buffer = Factory(sphereModel.class, [sphereModel]);
