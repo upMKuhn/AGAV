@@ -22,9 +22,7 @@ class TextureShader extends DrawShader{
         gl.vertexAttribPointer(this.textureBufferPtr,
             2, // Num elements 
             gl.FLOAT, gl.FALSE,
-            2 * Float32Array.BYTES_PER_ELEMENT, // individual vertex size
-            0
-        );
+            2 * Float32Array.BYTES_PER_ELEMENT, 0);
 
         gl.bindTexture(gl.TEXTURE_2D, glTextureObj)
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);

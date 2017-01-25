@@ -14,7 +14,7 @@ class main {
         this.myCanvas = new MyCanvas("myGLCanvas", this.input);
         this.assetLoadQueue = new AssetLoadQueue(makeCallback(this, this.onSuccessfullLoadedAssets),
                                                 makeCallback(this, this.onUnssucefullLoadedAssets));
-        this.camera = new Camera(0,  0, -13, 0, 0, 0);
+        this.camera = new Camera(0,  0, -30, 0, 0, 0);
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
         this.scene = new Foundation(this.assetLoadQueue, this.camera, this.renderQueue);
 
@@ -22,7 +22,7 @@ class main {
         this.scene.loadProgram("Assets/Shaders/ColorProgram.json");
         this.scene.loadProgram("Assets/Shaders/TextureProgram.json");
 
-        //this.scene.loadObject("Assets/Objects/earth.json");
+        this.scene.loadObject("Assets/Objects/earth.json");
         //this.scene.loadObject("Assets/Objects/sphere.json");
         //this.scene.loadObject("Assets/Objects/box.json");
         //this.scene.loadObject("Assets/Objects/texturedBox.json");
@@ -30,7 +30,7 @@ class main {
         //this.scene.loadObject("Assets/Objects/Floor.json");
         //this.scene.loadObject("Assets/Objects/Cube.json");
 
-        var sp = new Sphere("sphere2", 5, 21, 300);
+        var sp = new Sphere("sphere2", 5, 21, 18);
         this.scene.addObject(sp)
 
         this.assetLoadQueue.start();
