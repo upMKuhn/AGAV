@@ -20,6 +20,9 @@
 
     getRenderOptions() { return this.RenderOptions; }
 
+    usesIndecies() {
+        return this.indexBuffer.array.length > 0;
+    }
 
     applyToShader(drawShader) {
         var glBuffers = this.getBuffers();

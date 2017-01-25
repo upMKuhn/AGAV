@@ -8,6 +8,8 @@
         this.glTexture = gl.createTexture();
         this.glTextureMappingBuffer = gl.createBuffer();
         this.shaderProgramName = getOrDefault(model.shaderProgramName, "texture");
+
+        this.debugger.setTextureMap(this.model.array, this.usesIndecies(), this);
     }
 
     getGlTexture() { return this.glTexture; }
@@ -29,8 +31,10 @@
     }
 
     applyToShader(textureShader) {
-        textureShader.setTexture(this.getMapping(), this.getGlTexture(), this.getImage());
         super.applyToShader(textureShader);
+        this.model.array = this.debugger.getArray();
+        textureShader.setTexture(this.getMapping(), this.getGlTexture(), this.getImage());
+
     }
 
     getMapping()
@@ -40,7 +44,13 @@
         return this.glTextureMappingBuffer
     }
 
-
+    __setupVertexDebugger() {
+        if (this.indexBuffer.array.length > 0)
+            this.debugger = new TextureDebugger(1 * 3, this.indexBuffer.array);
+        else
+            this.debugger = new TextureDebugger(3 * 3, this.positionBuffer.array);
+        this.__applyDebugger();
+    }
     
 
 }

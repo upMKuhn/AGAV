@@ -56,10 +56,13 @@ function makeSphere(radius, numParallels, numMeridians)
 
     for (var p = 0; p < (numParallels ); p++) {
         for (var m = 0; m < numMeridians; m++) {
-            var p1 = grid[p][m];
-            var p2 = grid[p + 1][m];
-            var p3 = grid[p][m + 1];
-            faces.push(p1, p2, p3, grid[p + 1][m + 1]);
+
+            if (m < numMeridians) {
+                var p1 = grid[p][m];
+                var p2 = grid[p + 1][m];
+                var p3 = grid[p][m + 1];
+                faces.push(p1, p3, p2, grid[p + 1][m + 1]);
+            }
         }
     }
 

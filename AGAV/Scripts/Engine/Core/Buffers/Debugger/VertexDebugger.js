@@ -36,9 +36,9 @@
             return;
 
         this.__resetCallCounterIfNeeded();
+        this.__resetBufferIfNeeded();
 
-        if (this.nthCall == 0) {
-            this.__resetBufferIfNeeded();
+        if (this.nthCall == 0 && !this.paused) {
             this.__applyNextItem();
         }
 
@@ -46,7 +46,7 @@
     }
 
     __applyNextItem() {
-        if (!this.paused)
+        if (this.posAt < this.originalBuffer.length)
         {
             for (var i = 0; i < this.bufferItemSize; i++)
             {
@@ -67,9 +67,10 @@
         {
             this.debugbuffer.length = 0;
             this.posAt = 0;
-        }else if(this.posAt < 0)
+            this.__applyNextItem();
+        }else if(this.posAt <= 0)
         {
-            this.posAt = this.originalBuffer.length - 1;
+            this.posAt = this.originalBuffer.length - (1*this.bufferItemSize);
             this.debugbuffer.length = 0;
             for (var i = 0; i < this.originalBuffer.length; i++)
                 this.debugbuffer.push(this.originalBuffer[i]);
@@ -80,17 +81,24 @@
 
     __backOneBtnPressed() {
         this.posAt -= 1 * this.bufferItemSize;
-        if (this.debugbuffer.length > 0)
-            this.debugbuffer.length -= 1 * this.bufferItemSize;
+        if (this.posAt > 0)
+        {
+            this.debugbuffer.length = this.posAt;
+        }
+        this.__resetCallCounterIfNeeded();
     }
 
-    __pauseToggle() { this.paused = !this.paused; }
+    __pauseToggle() {
+        this.paused = !this.paused;
+
+    }
 
     __onNextBtnPressed() {
         var paused = this.paused;
         this.paused = false;
         this.__applyNextItem();
         this.paused = paused;
+        this.__resetCallCounterIfNeeded();
     }
 
 }

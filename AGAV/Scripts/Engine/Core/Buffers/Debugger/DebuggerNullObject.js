@@ -22,6 +22,8 @@
     onRenderCallMe() {
 
     }
+    setTextureMap() { }
+
 
 
 }
