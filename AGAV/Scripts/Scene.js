@@ -30,7 +30,7 @@ class main {
         //this.scene.loadObject("Assets/Objects/Floor.json");
         //this.scene.loadObject("Assets/Objects/Cube.json");
 
-        var sp = new Sphere("sphere2", 5, 18, 21);
+        var sp = new Sphere("sphere2", 5, 21, 300);
         this.scene.addObject(sp)
 
         this.assetLoadQueue.start();

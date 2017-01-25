@@ -14,8 +14,8 @@ function makeSphere(radius, numParallels, numMeridians)
     for (var p = -1; p < numParallels; p++)
     {
         var row = [];
-        var parallel = Math.PI * (p + 1) / numParallels
-        for (var m = 0; m < numMeridians+1; m++) {
+        var parallel = Math.PI * (p +1) / numParallels
+        for (var m = -1; m < numMeridians; m++) {
             var meridian = 2.0 * Math.PI * m / numMeridians
             var cartesian = sphericalToCartesian(radius, meridian, parallel);
             var vec3xyz = vec3.create(cartesian);
@@ -30,15 +30,14 @@ function makeSphere(radius, numParallels, numMeridians)
             y = vec3xyz[1] == 0 ? 0 : vec3xyz[1];
             z = vec3xyz[2] == 0 ? 0 : vec3xyz[2];
             //UV
-            var u = Math.atan2(x, z) / (2 * Math.PI) + 0.5;
+            var u = (Math.atan2(x, z) / (2 * Math.PI) + 0.5);
             var v = y * 0.5 + 0.5;
-            
-            if(u > 0.95)
-            {
-               // u = 0;
-            }
 
-            texture.push(u, v);
+            if (m == numMeridians - 1 && p == numParallels - 1)
+            { u = 0; v = 0;}
+
+
+            texture.push(u,v);
             row.push(index++);
         }
         grid.push(row);
