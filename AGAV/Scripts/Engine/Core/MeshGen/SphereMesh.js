@@ -106,11 +106,3 @@
     }
 }
 
-function sphericalToCartesian(radius, azimuth, elevation)
-{
-    var x = radius * Math.sin(elevation) * Math.cos(azimuth)
-    var y = radius * Math.sin(elevation) * Math.sin(azimuth)
-    var z = radius * Math.cos(elevation)
-    return [x , y , z];
-}
-

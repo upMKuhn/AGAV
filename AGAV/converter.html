@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <title>AGAV</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#convertBtn').click(function () {
+
+                var template = JSON.parse($('#template')[0].value);
+                var toconvert = JSON.parse($('#toconvert')[0].value);
+                var meshes = toconvert.meshes;
+                var final = {
+                    "ObjectName": "converted",
+                    "objectPosition": [0, 0, 0, 0, 0, 0],
+                    Mesh: []
+                };
+                for (var i = 0; i < meshes.length; i++)
+                {
+                    var mesh = {
+                        "meshName": template.meshName,
+                        "class": template.class,
+                        "shaderProgramName": template.shaderProgramName,
+                        "color": template.color,
+                        "RenderOptions": template.RenderOptions
+                    };
+
+
+                    mesh.position = {
+                        array: meshes[i].vertices,
+                        itemSize: 3
+                    }
+                    mesh.normals = meshes[i].normals;
+                    mesh.texture = {
+                        src:"",
+                        array: meshes[i].texturecoords
+                    }
+                    mesh.indices = {
+                        array: [].concat.apply([], meshes[i].faces),
+                        itemSize: 1
+                    }
+                    final.Mesh.push(mesh)
+                }
+
+                $('#result')[0].value = JSON.stringify(final, null, 2);
+            })
+        })
+    </script>
+
+</head>
+<body>
+    <div>converter for http://www.greentoken.de/onlineconv/ </div>
+    <h3>template</h3>
+    <textarea id="template">
+        {"meshName":  "unkown1","class": "ColorBuffer","shaderProgramName": "rgba_color","color": {"rgba": [ 1, 0, 0, 1.0 ]},"RenderOptions": {"drawShape": "TRIANGLE_STRIP"},"position": {"array": [],"itemSize": 3},"normals": [],"indices": {"array": [],"itemSize": 1}}
+    </textarea>
+
+    <h3>toConvert</h3>
+    <textarea id="toconvert"></textarea>
+
+    <button id="convertBtn">Convert!</button>
+
+    <h3>result</h3>
+    <textarea id="result"></textarea>
+</body>
+</html>

@@ -6,8 +6,8 @@
 
     enqueue(renderObject) {
         this.queue.push({
-            renderObj: renderObject,
-            vertexBuffer: renderObject.getVertexBuffer()
+            sceneObj: renderObject,
+            vertexBuffers: renderObject.getVertexBuffers()
         });
     }
 
@@ -16,21 +16,28 @@
         for (var i = 0; i < this.queue.length; i++)
         {
             var item = this.queue[i];
-            var renderObject = item.renderObj;
-            var vertexBuffer = item.vertexBuffer;
-            var program = this.__getShaderProgram(vertexBuffer.shaderProgramName);
+            var sceneObject = item.sceneObj;
             var viewModelMatrix = camera.getViewMatrix();
             var projectionMatrix = camera.getProjectionMatrix();
-            renderObject.applyModelMatrix(viewModelMatrix);
-            program.activate();
+            sceneObject.onRendering();
+            sceneObject.applyModelMatrix(viewModelMatrix);
 
-            if (program) {
-                var shader = program.getShader();
-                shader.setViewModelMatrix(viewModelMatrix);
-                shader.setProjectionMatrix(projectionMatrix);
+            var vertexBuffers = item.vertexBuffers;
 
-                vertexBuffer.applyToShader(shader);
-                shader.draw(vertexBuffer);
+            for (var j = 0; j < vertexBuffers.length; j++) {
+                var buffer = vertexBuffers[j];
+                var program = this.__getShaderProgram(buffer.shaderProgramName);
+                if (program) {
+                    program.activate();
+
+                    var shader = program.getShader();
+                    shader.setViewModelMatrix(viewModelMatrix);
+                    shader.setProjectionMatrix(projectionMatrix);
+
+                    buffer.applyToShader(shader);
+                    shader.draw(buffer);
+                }
+
             }
         }
 

@@ -81,13 +81,11 @@
         result = result & obj.position != undefined;
         result = result & obj.position.array != undefined;
         result = result & obj.position.itemSize != undefined;
-        result = result & obj.position.numItems != undefined;
 
 
         result = result & obj.indices != undefined;
         result = result & obj.indices.array != undefined;
         result = result & obj.indices.itemSize != undefined;
-        result = result & obj.indices.numItems != undefined;
 
         return result;
     }

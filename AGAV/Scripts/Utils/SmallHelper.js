@@ -7,6 +7,9 @@ function getOrDefault(value, defaultVal)
 
 function makeCallback(this_, func)
 {
+    if (func == undefined)
+        console.error("Can't make a call back without a function");
+
     var template = function () {
         var args = Array.prototype.slice.call(arguments, 0);
         func.apply(this_, args);
@@ -34,3 +37,12 @@ function jsonHelper(obj)
         return v;
     }, 2);
 }
+
+
+function sphericalToCartesian(radius, azimuth, elevation) {
+    var x = radius * Math.sin(elevation) * Math.cos(azimuth)
+    var y = radius * Math.sin(elevation) * Math.sin(azimuth)
+    var z = radius * Math.cos(elevation)
+    return [x, y, z];
+}
+

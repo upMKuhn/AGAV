@@ -32,7 +32,7 @@ function makeTypeDatabase()
         __types["VertexBuffer"] = VertexBuffer;
         __types["ColorBuffer"] = ColorBuffer;
         __types["TextureBuffer"] = TextureBuffer;
-        __types["RenderObject"] = RenderObject;
+        __types["RenderModel"] = RenderModel;
         __types["Shader"] = Shader;
         __types["DrawShader"] = DrawShader;
         __types["TextureShader"] = TextureShader;

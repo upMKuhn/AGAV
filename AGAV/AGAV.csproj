@@ -72,21 +72,15 @@
     <Content Include="Assets\Textures\box.jpg" />
     <Content Include="Assets\Textures\box.png" />
     <Content Include="Assets\Textures\earth.jpg" />
+    <Content Include="converter.html" />
     <Content Include="packages.config" />
     <Content Include="Assets\Shaders\src\TextureShader.vs.txt" />
-    <Content Include="Assets\Objects\Floor.json" />
-    <Content Include="Assets\Objects\Cube.json" />
-    <Content Include="Assets\Objects\box.json" />
     <Content Include="Assets\Objects\earth.json" />
-    <Content Include="Assets\Objects\triangle.json" />
-    <Content Include="Assets\Objects\texturedBox.json" />
-    <Content Include="Assets\Objects\sphere.json" />
-    <None Include="Assets\Objects\Object_TEMPLATE.json" />
+    <Content Include="Assets\Objects\Satelite.json" />
     <Content Include="Assets\Shaders\ColorProgram.json" />
     <Content Include="Assets\Shaders\src\ColorShader.vs.txt" />
     <Content Include="Assets\Shaders\2DColorProgram.json" />
     <Content Include="Assets\Shaders\TextureProgram.json" />
-    <Content Include="Assets\Objects\otherTexturedBox.json" />
     <Content Include="Assets\Shaders\LightShader.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -98,6 +92,9 @@
   <ItemGroup>
     <Content Include="Assets\Shaders\src\TextureShader.fs.txt" />
     <Content Include="index.html" />
+    <Content Include="Scripts\Engine\IO\AssetLoader.js" />
+    <Content Include="Scripts\Satelite.so.js" />
+    <Content Include="Scripts\Earth.so.js" />
     <Content Include="Scripts\Engine\Camera\FPSCameraControl.js" />
     <Content Include="Scripts\Engine\Camera\CameraControl.js" />
     <Content Include="Scripts\Engine\Core\Buffers\Debugger\DebuggerNullObject.js" />
@@ -107,6 +104,7 @@
     <Content Include="Scripts\Engine\Core\Buffers\TextureBuffer.js" />
     <Content Include="Scripts\Engine\Core\MeshGen\SphereMesh.js" />
     <Content Include="Scripts\Engine\Core\MeshGen\Sphere.js" />
+    <Content Include="Scripts\Engine\Core\SceneObject.js" />
     <Content Include="Scripts\Engine\Core\Shaders\2D\ColorShader2D.js" />
     <Content Include="Scripts\Engine\Core\Shaders\ColorShader.js" />
     <Content Include="Scripts\Engine\Core\Shaders\2D\DrawShader2D.js" />
@@ -118,7 +116,7 @@
     <Content Include="Scripts\Engine\IO\Input.js" />
     <Content Include="Scripts\Engine\Core\MyCanvas.js" />
     <Content Include="Scripts\Engine\Core\RenderQueue.js" />
-    <Content Include="Scripts\Engine\Core\RenderObject.js" />
+    <Content Include="Scripts\Engine\Core\RenderModel.js" />
     <Content Include="Scripts\Engine\Core\Shaders\DrawShader.js" />
     <Content Include="Scripts\Engine\Core\Shaders\Shader.js" />
     <Content Include="Scripts\Engine\Core\Buffers\VertexBuffer.js" />

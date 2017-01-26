@@ -1,21 +1,22 @@
 ﻿class TextureBuffer extends VertexBuffer {
-    constructor(model, image)
+    constructor(model)
     {
         super(model);
+        this.image = null;
         this.model = model.texture;
-        this.image = image;
-        this.isValidTextureBufferModel(this.model);
+        this.src = model.texture.src;
         this.glTexture = gl.createTexture();
         this.glTextureMappingBuffer = gl.createBuffer();
         this.shaderProgramName = getOrDefault(model.shaderProgramName, "texture");
 
+
+        this.isValidTextureBufferModel(this.model);
         this.debugger.setTextureMap(this.model.array, this.usesIndecies(), this);
     }
 
     getGlTexture() { return this.glTexture; }
     getImage() { return this.image}
     setImage(image) {
-        var i = new Image();
         this.image = image;
     }
 

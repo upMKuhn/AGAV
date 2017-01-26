@@ -8,7 +8,7 @@
         this.pitch = pitch;
         this.heading = heading;
         this.roll = roll;
-        this.moveSpeed = 0.1;
+        this.moveSpeed = 0.01;
     }
 
     pitchUp() {
@@ -61,12 +61,12 @@
 
     moveForward() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
-        this.z += this.moveSpeed * 10;
+        this.z += this.moveSpeed * 30;
     }
 
     moveBackward() {
         console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
-        this.z -= this.moveSpeed * 10;
+        this.z -= this.moveSpeed * 30;
     }
 
     getViewMatrix() {

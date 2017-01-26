@@ -1,6 +1,6 @@
 ﻿/// <reference path="VertexBuffer.js" />
 /// <reference path="ShaderProgram.js" />
-/// <reference path="RenderObject.js" />
+/// <reference path="RenderModel.js" />
 /// <reference path="Foundation.js" />
 /// <reference path="Factory.js" />
 /// <reference path="AssetLoadQueueItem.js" />
@@ -12,116 +12,49 @@ if ($ == undefined)
     alert("Jquery was not loaded! Please connect to the internet.");
 
 class Foundation{
-    constructor(assetLoadQueue, camera){
+    constructor(camera){
+        
         this.shaderProgams = {};
-        this.shaderProgamsToBeLinked = 0;
-        this.onInitalizedCallback = function(){};
 
-        this.assetLoadQueue = assetLoadQueue;
-        this.RenderObjects = {};
+        this.Models = {};
+        this.SceneObjects = {};
         this.camera = camera;
         this.renderQueue = new RenderQueue(this);
         gl.clearColor(1.0, 1.0, 1.0, 1.0);
     }
 
-    
+    addShaderProgram(program) {
+        this.shaderProgams[program.name] = {
+            isLinked: false,
+            prog: program
+        };
+    }
 
     getShaderProgram(name)
     {
-        return this.shaderProgams[name].isLinked ? this.shaderProgams[name].prog : null;
+        return this.shaderProgams[name].prog;
     }
 
-    callbackWhenInitalized(callback) {
-        this.onInitalizedCallback = callback;
-        if (this.shaderProgamsToBeLinked <= 0)
-            callback();
+    add3dModel(model) {
+        this.Models[model.getName()] = model;
     }
 
-    loadProgram(filePaths) {
-        if (typeof filePaths == 'string')
-            filePaths = [filePaths];
-
-        for (var i = 0; i < filePaths.length; i++) {
-            var queueItem = Factory("AssetLoadQueueItem", [filePaths[i], makeCallback(this, this.__onProgramLoaded)]);
-            this.assetLoadQueue.enqueue(queueItem)
-        }
+    addSceneObject(obj) {
+        this.SceneObjects[obj.name] = obj;
+        obj.setModel(this.Models[obj.modelName]);
     }
 
-    loadObject(filePaths) {
-        if (typeof filePaths == 'string')
-            filePaths = [filePaths];
-
-        for (var i = 0; i < filePaths.length; i++) {
-            var queueItem = Factory("AssetLoadQueueItem", [filePaths[i], makeCallback(this, this.__onObjectLoaded)]);
-            this.assetLoadQueue.enqueue(queueItem)
-        }
-    }
-
-    addObject(renderObject) {
-        this.RenderObjects[renderObject.objectName] = renderObject;
-        //Load texture image if needed
-        if (renderObject.vertexBuffer instanceof TextureBuffer) {
-            var buffer = renderObject.getVertexBuffer();
-            var queueItem = Factory("TextureLoadQueueItem", [buffer.model.src, makeCallback(buffer, buffer.setImage)]);
-            this.assetLoadQueue.enqueue(queueItem);
-        }
-    }
-
-    render() {
+    renderScene() {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         gl.enable(gl.DEPTH_TEST);
-        for (var obj in this.RenderObjects) {
-            this.renderQueue.enqueue(this.RenderObjects[obj]);
+        for (var name in this.SceneObjects) {
+            this.renderQueue.enqueue(this.SceneObjects[name]);
         }
         this.renderQueue.drawObjects(this.camera);
     }
 
-    __onObjectLoaded(object) {
-        var renderObject = Factory("RenderObject", [object]);
-        var buffer = Factory(object.Vertex.class, [object.Vertex]);
-        renderObject.setVertexBuffer(buffer);
-        this.addObject(renderObject);
-    }
-
-    __onProgramLoaded(shaderProgramModel) {
-
-        var fragShaderModel = shaderProgramModel.fragmentShader;
-        var vertexShaderModel = shaderProgramModel.vertexShader;
-        var shaderProgram = Factory("ShaderProgram", [shaderProgramModel.name]);
-
-        var fragShader = Factory(fragShaderModel.shaderClass.name, [fragShaderModel, makeCallback(shaderProgram, shaderProgram.addShader)]);
-        var vertexShader = Factory(vertexShaderModel.shaderClass.name, [vertexShaderModel, makeCallback(shaderProgram, shaderProgram.addShader)]);
-
-        this.__addShaderProgram(shaderProgram);
-        shaderProgram.subscripeOnProgramLinked(makeCallback(this, this.__onProgramLinked));
-        shaderProgram.subscripeOnProgramLinked(makeCallback(fragShader, fragShader.onProgramLinked));
-        shaderProgram.subscripeOnProgramLinked(makeCallback(vertexShader, vertexShader.onProgramLinked));
-
-        //now that we have the model we quickly fetch the source code as well. 
-        var vertexQueueItem = Factory("AssetLoadQueueItem", [vertexShaderModel.src, makeCallback(vertexShader, vertexShader.setSourceCodeAndCompile)]);
-        var fragmentQueueItem = Factory("AssetLoadQueueItem", [fragShaderModel.src, makeCallback(fragShader, fragShader.setSourceCodeAndCompile)]);
-        this.assetLoadQueue.enqueue(vertexQueueItem);
-        this.assetLoadQueue.enqueue(fragmentQueueItem);
-
-    }
-
-    __addShaderProgram(programObj, isLinked) {
-        this.shaderProgams[programObj.name] = {
-            isLinked: false,
-            prog: programObj
-        };
-        this.shaderProgamsToBeLinked++;
-    }
-
-    __onProgramLinked(program)
-    {
-        this.shaderProgams[program.name].isLinked = true;
-        this.shaderProgamsToBeLinked--;
-
-        if (this.shaderProgamsToBeLinked <= 0)
-            this.onInitalizedCallback();
-    }
+    
 }
 
 

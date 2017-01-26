@@ -14,24 +14,20 @@ class main {
         this.myCanvas = new MyCanvas("myGLCanvas", this.input);
         this.assetLoadQueue = new AssetLoadQueue(makeCallback(this, this.onSuccessfullLoadedAssets),
                                                 makeCallback(this, this.onUnssucefullLoadedAssets));
-        this.camera = new Camera(0,  0, -10, 0, 0, 0);
+
+        this.camera = new Camera(0, 0, -30, 1, 2, 0);
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
-        this.scene = new Foundation(this.assetLoadQueue, this.camera, this.renderQueue);
+        this.scene = new Foundation(this.camera);
 
-        this.scene.loadProgram("Assets/Shaders/2DColorProgram.json");
-        this.scene.loadProgram("Assets/Shaders/ColorProgram.json");
-        this.scene.loadProgram("Assets/Shaders/TextureProgram.json");
+        this.assetLoader = new AssetLoader(this.assetLoadQueue, this.scene);
 
-        //this.scene.loadObject("Assets/Objects/earth.json");
-        //this.scene.loadObject("Assets/Objects/sphere.json");
-        //this.scene.loadObject("Assets/Objects/box.json");
-        //this.scene.loadObject("Assets/Objects/texturedBox.json");
-        //this.scene.loadObject("Assets/Objects/otherTexturedBox.json");
-        //this.scene.loadObject("Assets/Objects/Floor.json");
-        //this.scene.loadObject("Assets/Objects/Cube.json");
+        this.assetLoader.loadProgram("Assets/Shaders/2DColorProgram.json");
+        this.assetLoader.loadProgram("Assets/Shaders/ColorProgram.json");
+        this.assetLoader.loadProgram("Assets/Shaders/TextureProgram.json");
+        this.assetLoader.loadModel("Assets/Objects/Satelite.json");
 
-        var sp = new Sphere("sphere2", 5, 100, 620);
-        this.scene.addObject(sp)
+        var sp = new Sphere("sphere", 5, 100, 620);
+        this.assetLoader.addRenderModel(sp);
 
         this.assetLoadQueue.start();
     }
@@ -42,14 +38,19 @@ class main {
     onSuccessfullLoadedAssets()
     {
         console.log("All assets loaded :)");
-        this.scene.callbackWhenInitalized(makeCallback(this,this.onInitalized));
+        this.assetLoader.setCallbackOnDone(makeCallback(this, this.onInitalized));
     }
 
     onInitalized()
     {
         gl.clearColor(0.8, 0.8, 0.8, 1.0);
         gl.enable(gl.DEPTH_TEST);
-        setInterval(makeCallback(this.scene, this.scene.render), 50);
+
+        this.scene.addSceneObject(new Earth("Earth", "sphere"));
+
+        this.scene.addSceneObject(new Satelite("SatCom1", "SateliteModel"));
+
+        setInterval(makeCallback(this.scene, this.scene.renderScene), 50);
     }
 
     onUnssucefullLoadedAssets() { 

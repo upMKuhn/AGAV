@@ -1,39 +1,38 @@
 ﻿
-class Sphere extends RenderObject {
+class Sphere extends RenderModel {
     constructor(objectName, radius, numParallels, numMeridians)
     {
         var mesh = new SphereMesh(radius, numParallels, numMeridians);
-        var sphereModel = {
+        var sphereMesh = {};
+
+        sphereMesh = {
             "class": "TextureBuffer",
             "shaderProgramName": "texture",
             "RenderOptions": {
                 "drawShape": "TRIANGLE_STRIP",
             },
         };
-
-        sphereModel.position = {
+        sphereMesh.position = {
             array: [].concat.apply([], mesh.vertecies),
             "itemSize": 3,
-            "numItems": mesh.vertecies.length
         }
-        sphereModel.indices = {
+        sphereMesh.indices = {
             array: mesh.faces,
             "itemSize": 1,
-            "numItems": mesh.faces.length
         }
-        sphereModel.color = {
+        sphereMesh.color = {
             array: []
         }
-        sphereModel.texture = {
+        sphereMesh.texture = {
             array: mesh.texture,
             "src": "Assets/Textures/earth.jpg",
         }
 
-        var buffer = Factory(sphereModel.class, [sphereModel]);
+        var buffer = Factory(sphereMesh.class, [sphereMesh]);
         var renderObjModel = {
             "ObjectName": objectName,
-            "objectPosition": [0, 0, 0, -1.45, -0.1, -0.5],
-            "Vertex": sphereModel
+            "objectPosition": [0, 0, 0, -1.45, 0, 0],
+            "Mesh": [sphereMesh]
         }
         super(renderObjModel, buffer);
         //this.generateRGBA(sphereModel);
@@ -61,7 +60,6 @@ class Sphere extends RenderObject {
         var factor = 10 * decimal;
         return Math.floor(Math.random() * factor) / factor;
     }
-
 
    
 }
