@@ -2,7 +2,7 @@
 class Sphere extends RenderObject {
     constructor(objectName, radius, numParallels, numMeridians)
     {
-        var mesh = makeSphere(radius, numParallels, numMeridians)
+        var mesh = new SphereMesh(radius, numParallels, numMeridians);
         var sphereModel = {
             "class": "TextureBuffer",
             "shaderProgramName": "texture",
@@ -32,7 +32,7 @@ class Sphere extends RenderObject {
         var buffer = Factory(sphereModel.class, [sphereModel]);
         var renderObjModel = {
             "ObjectName": objectName,
-            "objectPosition": [0, 0, 0, 0.2, 3, 0],
+            "objectPosition": [0, 0, 0, -1.45, -0.1, -0.5],
             "Vertex": sphereModel
         }
         super(renderObjModel, buffer);

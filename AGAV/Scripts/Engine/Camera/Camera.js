@@ -8,7 +8,7 @@
         this.pitch = pitch;
         this.heading = heading;
         this.roll = roll;
-        this.moveSpeed = 0.01;
+        this.moveSpeed = 0.1;
     }
 
     pitchUp() {

@@ -105,7 +105,7 @@
     <Content Include="Scripts\Engine\Core\Buffers\Debugger\VertexDebugger.js" />
     <Content Include="Scripts\Engine\Core\Buffers\Debugger\TextureDebugger.js" />
     <Content Include="Scripts\Engine\Core\Buffers\TextureBuffer.js" />
-    <Content Include="Scripts\Engine\Core\MeshGen\MeshGenerator.js" />
+    <Content Include="Scripts\Engine\Core\MeshGen\SphereMesh.js" />
     <Content Include="Scripts\Engine\Core\MeshGen\Sphere.js" />
     <Content Include="Scripts\Engine\Core\Shaders\2D\ColorShader2D.js" />
     <Content Include="Scripts\Engine\Core\Shaders\ColorShader.js" />

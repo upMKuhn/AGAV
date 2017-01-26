@@ -1,6 +1,6 @@
 {
   "ObjectName": "Earth",
-  "objectPosition": [ -10, 0, 0, 0.5, 5, 0],
+  "objectPosition": [ -10, 0, 0, 0, -1.0, 0],
 
   "Vertex": {
     "class": "TextureBuffer",

@@ -13,6 +13,8 @@
         this.debugbuffer = [];
         this.saveAsOriginal(originalData);
 
+        console.warn("Debugger is attached");
+
         $("#backBtn").click(makeCallback(this, this.__backOneBtnPressed));
         $("#pauseBtn").click(makeCallback(this, this.__pauseToggle));
         $("#nextBtn").click(makeCallback(this, this.__onNextBtnPressed));
