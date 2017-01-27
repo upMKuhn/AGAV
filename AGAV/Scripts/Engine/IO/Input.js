@@ -14,7 +14,11 @@
         this.__setKeyState("shift", false);
         this.__setKeyState("leftMouseBtn", false);
         this.__setKeyState("middleMouseBtn", false);
-        this.__setKeyState("rightMouseBtn", false);
+        this.__setKeyState("ArrowDown", false);
+        this.__setKeyState("ArrowUp", false);
+        this.__setKeyState("ArrowRight", false);
+        this.__setKeyState("ArrowLeft", false);
+
     }
 
 

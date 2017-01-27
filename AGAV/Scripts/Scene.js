@@ -48,7 +48,7 @@ class main {
 
         this.scene.addSceneObject(new Earth("Earth", "sphere"));
 
-        this.scene.addSceneObject(new Satelite("SatCom1", "SateliteModel"));
+        this.scene.addSceneObject(new Satelite("SatCom1", "SateliteModel", this.myCanvas));
 
         setInterval(makeCallback(this.scene, this.scene.renderScene), 50);
     }

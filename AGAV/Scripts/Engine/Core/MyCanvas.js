@@ -12,6 +12,8 @@
 
         this.$canvas.focus(makeCallback(this, this.__onFocus))
         this.$canvas.blur(makeCallback(this, this.__onBlur))
+
+        //setup child class... wire the class up as it has no knowleadge of the html behind
         $(document).keydown(makeCallback(InputClass, InputClass.onKeyDown));
         $(document).keyup(makeCallback(InputClass, InputClass.onKeyUp));
         this.$canvas.mousemove(makeCallback(InputClass, InputClass.onMouseMove));

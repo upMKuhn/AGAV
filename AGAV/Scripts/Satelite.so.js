@@ -2,12 +2,18 @@
 //.so means secene object
 class Satelite extends SceneObject{
 
-    constructor(name, modelName, worldCoords)
+    constructor(name, modelName, myCanvas, worldCoords)
     {
         super(name, modelName, worldCoords);
         this.radius = 10;
-        this.angle = 1.5;
-        this.orbitSpeed = 0.01;
+        this.angle = 1.6;
+        this.orbitSpeed = -0.02;
+
+        myCanvas.subscribeOnKeyCombo(['ArrowDown'], makeCallback(this, this.reduceSpeed));
+        myCanvas.subscribeOnKeyCombo(['ArrowUp'], makeCallback(this, this.increaseSpeed));
+        myCanvas.subscribeOnKeyCombo(['ArrowRight'], makeCallback(this, this.increaseOrbit));
+        myCanvas.subscribeOnKeyCombo(['ArrowLeft'], makeCallback(this, this.decreaseOrbit));
+
     }
 
     onRendering() {
@@ -20,11 +26,28 @@ class Satelite extends SceneObject{
 
         if (this.angle > maxRadiant)
             this.angle -= maxRadiant;
+        else if (this.angle < -maxRadiant) {
+            this.angle += maxRadiant;
+        }
 
         super.rotate(0, -this.orbitSpeed, 0);
-
-
     }
 
+
+    reduceSpeed() {
+        this.orbitSpeed += 0.01;
+    }
+
+    increaseSpeed() {
+        this.orbitSpeed -= 0.01;
+    }
+
+    increaseOrbit() {
+        this.radius += 0.1;
+    }
+
+    decreaseOrbit() {
+        this.radius -= 0.1;
+    }
 
 }
