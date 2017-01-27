@@ -2,6 +2,7 @@
     constructor() {
         this.keyStates = {};
         this.keyComboSubscriber = [];
+        this.keyDownSubscriber = {};
         this.mouseSubscriber = [];
         this.mouseWithKeyComboSubscriber = [];
 
@@ -21,9 +22,15 @@
 
     }
 
+    subscribeOnKeyDown(keyName, callback) {
+        keyName = keyName.toLowerCase();
+        this.keyDownSubscriber[keyName] = getOrDefault(this.keyDownSubscriber[keyName], []);
+        this.keyDownSubscriber[keyName].push(callback);
+    }
 
-    subscribeOnKeyCombo(keyNameArray, callback) {
-        this.keyComboSubscriber.push({
+
+    subscribeOnKeyCombo(keyName, callback) {
+        this.keyDownSubscriber.push({
             combination: keyNameArray,
             callback: callback
         });
@@ -86,6 +93,7 @@
     onKeyDown(eventArg) {
         this.__setKeyState(eventArg.key, true);
         this.__onKeyStateChange();
+        this.__notifyKeyStateDownSubscriber();
     }
 
     __raiseMouseEvent(mouseX, mouseY) {
@@ -101,12 +109,28 @@
     }
 
     __onKeyStateChange() {
+        //keyComboSubscriber 
         var notifiable = this.__getSubscribersWithActiveKeyCombo(this.keyComboSubscriber);
         for (var i = 0; i < notifiable.length; i++)
             notifiable[i].callback(this.keyStates);
+
     }
 
     //helper
+    __notifyKeyStateDownSubscriber() {
+        
+        for (var keyName in this.keyStates)
+        {
+            if (this.__getKeyState(keyName)) {
+                var subscriber = this.keyDownSubscriber[keyName];
+                for (var i = 0; i < subscriber.length; i++) {
+                    subscriber[i]();
+                }
+            }
+        }
+    }
+
+
     __getSubscribersWithActiveKeyCombo(subscriberList) {
         var result = [];
 

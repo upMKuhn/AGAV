@@ -29,6 +29,10 @@
         this.input.subscribeOnKeyCombo(keyCombo, callback);
     }
 
+    subscribeOnKeyDown(key, callback) {
+        this.input.subscribeOnKeyDown(key, callback);
+    }
+
     subscribeToMouseMovement(callback) {
         var wrappedCallback = this.__WrapWithCoordinateConversion(callback);
         subscribeToMouseMovement(wrappedCallback);

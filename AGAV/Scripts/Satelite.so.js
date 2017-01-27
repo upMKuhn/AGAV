@@ -7,18 +7,22 @@ class Satelite extends SceneObject{
         super(name, modelName, worldCoords);
         this.radius = 10;
         this.angle = 1.6;
-        this.orbitSpeed = -0.02;
+        this.orbitSpeed = -0.01;
+        this.MaxOrbitSpeed = 0.5;
+        this.MinRadius = 7.5;
+        this.MaxRadius = 30;
 
-        myCanvas.subscribeOnKeyCombo(['ArrowDown'], makeCallback(this, this.reduceSpeed));
-        myCanvas.subscribeOnKeyCombo(['ArrowUp'], makeCallback(this, this.increaseSpeed));
-        myCanvas.subscribeOnKeyCombo(['ArrowRight'], makeCallback(this, this.increaseOrbit));
-        myCanvas.subscribeOnKeyCombo(['ArrowLeft'], makeCallback(this, this.decreaseOrbit));
+
+        myCanvas.subscribeOnKeyDown('ArrowDown', makeCallback(this, this.reduceSpeed));
+        myCanvas.subscribeOnKeyDown('ArrowUp', makeCallback(this, this.increaseSpeed));
+        myCanvas.subscribeOnKeyDown('ArrowRight', makeCallback(this, this.increaseOrbit));
+        myCanvas.subscribeOnKeyDown('ArrowLeft', makeCallback(this, this.decreaseOrbit));
 
     }
 
     onRendering() {
         var newX = this.radius * Math.cos(this.angle);
-        var newZ = this.radius * Math.sin(this.angle)-(this.radius);
+        var newZ = this.radius * Math.sin(this.angle);
         this.setPosition(newX, null, newZ);
 
         var maxRadiant = (Math.PI / 180) * 360;
@@ -29,25 +33,36 @@ class Satelite extends SceneObject{
         else if (this.angle < -maxRadiant) {
             this.angle += maxRadiant;
         }
-
         super.rotate(0, -this.orbitSpeed, 0);
+        //this.logDistance();
     }
 
+    logDistance() {
+        var x = this.worldCoords[0];
+        var y = this.worldCoords[1];
+        var z = this.worldCoords[2];
 
-    reduceSpeed() {
-        this.orbitSpeed += 0.01;
+        console.log(Math.sqrt(x * x + y * y + z * z));
     }
 
     increaseSpeed() {
-        this.orbitSpeed -= 0.01;
+        if (this.orbitSpeed < this.MaxOrbitSpeed)
+            this.orbitSpeed += 0.01;
+    }
+
+    reduceSpeed() {
+        if (this.orbitSpeed > -this.MaxOrbitSpeed)
+            this.orbitSpeed -= 0.01;
     }
 
     increaseOrbit() {
-        this.radius += 0.1;
+        if(this.radius < this.MaxRadius)
+            this.radius += 0.1;
     }
 
     decreaseOrbit() {
-        this.radius -= 0.1;
+        if (this.radius > this.MinRadius)
+            this.radius -= 0.1;
     }
 
 }
