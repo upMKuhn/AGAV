@@ -12,11 +12,19 @@
         this.glIndexBuffer = gl.createBuffer();
         this.debugger = new DebuggerNullObject();
 
+        this.dimensions = Factory("ModelDimension", [0, 0, 0, [0,0,0], [0,0,0]]);
+
+        
+
+
         this.model = data;
         if (data != undefined)
             this.applyModel(data);
     }
 
+    getDimensions() {
+        return this.dimensions.copy();
+    }
 
     getRenderOptions() { return this.RenderOptions; }
 
@@ -57,8 +65,11 @@
             this.normals = model.normals;
             this.__generateNormals();
             this.__setupVertexDebugger();
+            this.__updateDimensions();
         }
     }
+
+
 
     __setupVertexDebugger() {
         if (this.indexBuffer.array.length > 0) 
@@ -75,7 +86,6 @@
             this.positionBuffer.array = this.debugger.getBuffer();
     }
 
-
     __isValidVertexBufferModel(obj) {
         var result = true;
         result = result & obj.position != undefined;
@@ -89,7 +99,6 @@
 
         return result;
     }
-
 
     __makeBuffers(glBuffer, modelBuffer, bufferTypeEnum, dataTypeEnum)
     {
@@ -164,6 +173,36 @@
             this.normals.push(p1[1] != NaN ? p1[1] : 0);
             this.normals.push(p1[2] != NaN ? p1[2] : 0);
         }
+    }
+
+    __updateDimensions()
+    {
+        var minx=0, miny=0, minz=0, maxx=0, maxy=0, maxz=0;
+        var vertecies = this.positionBuffer.array;
+
+        for(var i=0; i< vertecies.length; i+= 3)
+        {
+            var x = vertecies[i+0];
+            var y = vertecies[i+1];
+            var z = vertecies[i + 2];
+
+            minx = x < minx ? x : minx;
+            miny = y < miny ? y : miny;
+            minz = z < minz ? z : minz;
+
+            maxx = x > maxx ? x : maxx;
+            maxy = y > maxy ? y : maxy;
+            maxz = z > maxz ? z : maxz;
+        }
+
+        var height = Math.abs(maxy - miny);
+        var width = Math.abs(maxx - minx);
+        var depth = Math.abs(maxz - minz);
+
+        var topLeft = [minx, maxy, maxz];
+        var bottomRight = [maxx, miny, minz];
+
+        this.dimensions.update(height, width, depth, topLeft, bottomRight);
     }
 
 }

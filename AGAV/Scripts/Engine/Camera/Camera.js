@@ -1,9 +1,11 @@
 ﻿class Camera {
-    constructor(x, y, z, pitch, heading, roll)
+    constructor(x, y, z, pitch, heading, roll, minZoom)
     {
         this.x = x;
         this.y = y;
         this.z = z;
+
+        this.minZoom = getOrDefault(minZoom, 0);
 
         this.pitch = pitch;
         this.heading = heading;
@@ -60,7 +62,8 @@
     }
 
     moveForward() {
-        console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
+        if (Math.abs(this.z) <= this.minZoom)
+            return;
         this.z += this.moveSpeed * 30;
     }
 

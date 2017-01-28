@@ -15,7 +15,7 @@ class main {
         this.assetLoadQueue = new AssetLoadQueue(makeCallback(this, this.onSuccessfullLoadedAssets),
                                                 makeCallback(this, this.onUnssucefullLoadedAssets));
 
-        this.camera = new Camera(0, 0, -30, 1, 2, 0);
+        this.camera = new Camera(0, 0, -30, 1, 2, 0, 6);
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
         this.scene = new Foundation(this.camera);
 
@@ -25,8 +25,10 @@ class main {
         this.assetLoader.loadProgram("Assets/Shaders/ColorProgram.json");
         this.assetLoader.loadProgram("Assets/Shaders/TextureProgram.json");
         this.assetLoader.loadModel("Assets/Objects/Satelite.json");
+        this.assetLoader.loadModel("Assets/Objects/earth.json");
 
-        var sp = new Sphere("sphere", 5, 100, 620);
+
+        var sp = new Sphere("sphere", 5, 20, 50);
         this.assetLoader.addRenderModel(sp);
 
         this.assetLoadQueue.start();
@@ -43,10 +45,12 @@ class main {
 
     onInitalized()
     {
-        gl.clearColor(0.8, 0.8, 0.8, 1.0);
+        gl.clearColor(0, 0, 0, 1.0);
         gl.enable(gl.DEPTH_TEST);
 
         this.scene.addSceneObject(new Earth("Earth", "sphere"));
+        this.scene.addSceneObject(new Earth("Earth2", "Earth"));
+
 
         this.scene.addSceneObject(new Satelite("SatCom1", "SateliteModel", this.myCanvas));
 

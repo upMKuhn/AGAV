@@ -6,18 +6,18 @@
         this.texture = [];
         this.normals = [];
 
-        this.makeSphere(radius, numParallels, numMeridians);
+        this.makeSphere(radius, numMeridians, numParallels);
     }
 
-    makeSphere(radius, numParallels, numMeridians) {
+    makeSphere(radius, numMeridians, numParallels) {
         var index = 0;
         var grid = [];
 
-        for (var p = -1; p < numParallels; p+=1) {
+        for (var m = 0; m < numMeridians+1; m+=1) {
             var row = [];
-            var parallel = Math.PI * (p + 1) / numParallels
-            for (var m = -1; m < numMeridians; m+=1) {
-                var meridian = 2.0 * Math.PI * m / numMeridians
+            var meridian = 2.0 * Math.PI * m / numMeridians
+            for (var p = 0; p < numParallels+1; p+=1) {
+                var parallel = Math.PI * (p) / numParallels
                 var cartesian = sphericalToCartesian(radius, meridian, parallel);
                 var vec3xyz = vec3.create(cartesian);
                 this.vertecies.push(cartesian);
@@ -32,31 +32,26 @@
                 var z = vec3xyz[2] == 0 ? 0 : vec3xyz[2];
                 //UV
 
-                var u = (Math.atan2(x, z) / (2 * Math.PI) + 0.5);
-                var v = y * 0.5 + 0.5;
+                var u = Math.max(1-(m / numMeridians), 0);
+                var v = Math.max(1-(p / numParallels), 0);
 
-
-
-                this.texture.push((m/numMeridians), 1-(p/numParallels));
+                this.texture.push(Math.min(u, 1), Math.min(v, 1));
                 row.push(index++);
             }
             this.grid.push(row);
         }
 
-        for (var p = 0; p < (numParallels) ; p++) {
-            for (var m = 0; m < numMeridians; m++) {
-
-                if (m < numMeridians) {
-                    var p1 = this.grid[p][m];
-                    var p2 = this.grid[p + 1][m];
-                    var p3 = this.grid[p][m + 1];
-                    this.faces.push(p1, p3, p2, this.grid[p + 1][m + 1]);
-                    //this.UVfix(this.faces.length-4);
-                }
+        for (var m = 0; m < numMeridians; m++) {
+            for (var p = 0; p < numParallels + 1; p++) {
+                var p1 = this.grid[m][p];
+                var p2 = this.grid[m + 1][p];
+                var p3 = this.grid[m][p + 1];
+                this.faces.push(p1, p3, p2, this.grid[m + 1][p + 1]);
             }
         }
     }
 
+//IGNORE ----------------------
     UVfix(faceIndex) {
         var uvs = this.fecthUVForSquare(faceIndex);
         for (var j = 0; j < uvs.length; j++) {
@@ -87,8 +82,6 @@
         if (u1[0] > u2[0]) {
             this.replaceUVValue(index2, [1-u2[0], u2[1]]);
         }
-
-
     }
 
     fecthUVForSquare(faceIndex) {

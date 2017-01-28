@@ -1,4 +1,7 @@
-﻿class Input {
+﻿//OK this class could have been done better.
+//Should I use this class again. The subscriber management should be shifted to a seperate class. 
+
+class Input {
     constructor() {
         this.keyStates = {};
         this.keyComboSubscriber = [];
@@ -121,8 +124,8 @@
         
         for (var keyName in this.keyStates)
         {
-            if (this.__getKeyState(keyName)) {
-                var subscriber = this.keyDownSubscriber[keyName];
+            var subscriber = this.keyDownSubscriber[keyName];
+            if (this.__getKeyState(keyName) && subscriber) {
                 for (var i = 0; i < subscriber.length; i++) {
                     subscriber[i]();
                 }

@@ -92,6 +92,8 @@
   <ItemGroup>
     <Content Include="Assets\Shaders\src\TextureShader.fs.txt" />
     <Content Include="index.html" />
+    <Content Include="Scripts\Engine\Core\ModelDimension.js" />
+    <Content Include="Scripts\Engine\Core\Physics\CollisionBox.js" />
     <Content Include="Scripts\Engine\IO\AssetLoader.js" />
     <Content Include="Scripts\Satelite.so.js" />
     <Content Include="Scripts\Earth.so.js" />

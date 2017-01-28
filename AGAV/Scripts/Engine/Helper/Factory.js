@@ -37,6 +37,7 @@ function makeTypeDatabase()
         __types["DrawShader"] = DrawShader;
         __types["TextureShader"] = TextureShader;
         __types["ColorShader"] = ColorShader;
+
         
         __types["DrawShader2D"] = DrawShader2D;
         __types["ColorShader2D"] = ColorShader2D;
@@ -45,6 +46,8 @@ function makeTypeDatabase()
         __types["Camera"] = Camera;
         __types["RenderQueue"] = RenderQueue;
 
+        __types["ModelDimension"] = ModelDimension;
+        __types["CollisionBox"] = CollisionBox;
 
 
     }
