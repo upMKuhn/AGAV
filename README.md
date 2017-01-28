@@ -7,8 +7,8 @@ No Unit tests?  I gave my best to decouple everything to make it testable, but v
   
 #Documentation
 Code is in the Scripts folder  
-Engine - Generic frame work
-Scene.js is a good example how to use the framework to load assets, scene creation and rendering is done.  
+Engine - Generic framework  
+Scene.js is a good example. How to use the framework. It contains Loading assets, scene creation and rendering.  
   
 The Scene.Js is the consumer of the framework and feeds all releavent information into the framework  
 The Engine/Core folder contains the heart, with the foundation.js file beeing the heart muscle gluing everything into place.  
