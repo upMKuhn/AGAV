@@ -17,11 +17,12 @@
         {
             var item = this.queue[i];
             var sceneObject = item.sceneObj;
-            var viewModelMatrix = camera.getViewMatrix();
-            var projectionMatrix = camera.getProjectionMatrix();
-            sceneObject.onRendering();
-            sceneObject.applyModelMatrix(viewModelMatrix);
 
+            sceneObject.onRendering();
+
+            var viewMatrix = camera.getViewMatrix();
+            var worldMatrix = sceneObject.getModelMatrix();
+            var projectionMatrix = camera.getProjectionMatrix();
             var vertexBuffers = item.vertexBuffers;
 
             for (var j = 0; j < vertexBuffers.length; j++) {
@@ -31,7 +32,8 @@
                     program.activate();
 
                     var shader = program.getShader();
-                    shader.setViewModelMatrix(viewModelMatrix);
+                    shader.setViewMatrix(viewMatrix);
+                    shader.setWorldMatrix(worldMatrix);
                     shader.setProjectionMatrix(projectionMatrix);
 
                     buffer.applyToShader(shader);

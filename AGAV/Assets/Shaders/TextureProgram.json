@@ -16,7 +16,9 @@
         "name": "TextureShader",
         "vertexAttributeName": "aVertexPosition",
         "textureAttributeName": "aTextureCoordinates",
-        "viewModelMatrixName": "uViewModelMatrix",
+        "viewMatrixName": "uViewMatrix",
+        "worldMatrixName": "uWorldMatrix",
+        "normalName": "aNormal",
         "projectionMatrixName": "uProjectionMatrix"
       }
   }

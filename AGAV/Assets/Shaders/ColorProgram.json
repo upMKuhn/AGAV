@@ -15,7 +15,9 @@
       "name": "ColorShader",
       "vertexAttributeName": "aVertexPosition",
       "colorAttributeName": "aVertexColor",
-      "viewModelMatrixName": "uViewModelMatrix",
+      "viewMatrixName": "uViewMatrix",
+      "worldMatrixName": "uWorldMatrix",
+      "normalName": "aNormal",
       "projectionMatrixName": "uProjectionMatrix"
     }
   }

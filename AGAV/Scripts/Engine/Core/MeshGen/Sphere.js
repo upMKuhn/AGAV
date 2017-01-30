@@ -20,6 +20,7 @@ class Sphere extends RenderModel {
             array: mesh.faces,
             "itemSize": 1,
         }
+        sphereMesh.normals = mesh.normals;
         sphereMesh.color = {
             array: []
         }

@@ -67,8 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Shaders\src\2DColorShader.fs.txt" />
+    <Content Include="Assets\Shaders\src\Lighting.fs.txt" />
     <Content Include="Assets\Shaders\src\ColorShader.fs.txt" />
     <Content Include="Assets\Shaders\src\2DColorShader.vs.txt" />
+    <Content Include="Assets\Shaders\src\Lighting.vs.txt" />
     <Content Include="Assets\Textures\box.jpg" />
     <Content Include="Assets\Textures\box.png" />
     <Content Include="Assets\Textures\earth.jpg" />
@@ -92,6 +94,7 @@
   <ItemGroup>
     <Content Include="Assets\Shaders\src\TextureShader.fs.txt" />
     <Content Include="index.html" />
+    <Content Include="Scripts\Engine\Core\Shaders\LightShader.js" />
     <Content Include="Scripts\Engine\Core\ModelDimension.js" />
     <Content Include="Scripts\Engine\Core\Physics\CollisionBox.js" />
     <Content Include="Scripts\Engine\IO\AssetLoader.js" />

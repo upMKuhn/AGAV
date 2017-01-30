@@ -24,7 +24,7 @@
 
                 //NORMALS
                 vec3.normalize(vec3xyz, vec3xyz);
-                this.normals.push(vec3xyz);
+                this.normals.push(vec3xyz[0], vec3xyz[1], vec3xyz[2]);
 
 
                 var x = vec3xyz[0] == 0 ? 0 : vec3xyz[0];
@@ -50,6 +50,15 @@
             }
         }
     }
+
+
+
+
+
+
+
+
+
 
 //IGNORE ----------------------
     UVfix(faceIndex) {

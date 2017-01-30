@@ -1,6 +1,13 @@
 ﻿precision mediump float;
 varying vec4 vColor;
+varying vec3 vNormal;
 
 void main() {
-	gl_FragColor = vColor;   
+	vec3 normal = normalize(vNormal);
+	vec3 ambientLightStrength = vec3(0.2, 0.2, 0.2);
+	vec3 sunLightStrength = vec3(0.9, 0.9, 0.9);
+	vec3 sunDirection = normalize(vec3(0.0, 20.0, 5.0));
+	vec3 lightStrength = ambientLightStrength + sunLightStrength * max(dot(sunDirection, normal), 0.0);
+
+	gl_FragColor = vec4(vColor.rgb * lightStrength, 1);
 } 

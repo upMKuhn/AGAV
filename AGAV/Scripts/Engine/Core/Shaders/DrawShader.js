@@ -5,7 +5,9 @@ class DrawShader extends Shader {
         super(model, onCompiled);
 
         this.vertexPositionBufferPtr = null;
-        this.viewModelMatrixPtr = null;
+        this.viewMatrixPtr = null;
+        this.worldMatrixPtr = null;
+        this.normalPtr = null;
         this.projectionMatrixPtr = null;
     }
 
@@ -14,8 +16,12 @@ class DrawShader extends Shader {
     { 
         var shaderClass = this.model.shaderClass;
         this.vertexPositionBufferPtr = gl.getAttribLocation(program.glProgram, shaderClass.vertexAttributeName);
-        this.viewModelMatrixPtr = gl.getUniformLocation(program.glProgram, shaderClass.viewModelMatrixName);
+        this.normalPtr = gl.getAttribLocation(program.glProgram, shaderClass.normalName);
+        this.viewMatrixPtr = gl.getUniformLocation(program.glProgram, shaderClass.viewMatrixName);
+        this.worldMatrixPtr = gl.getUniformLocation(program.glProgram, shaderClass.worldMatrixName);
         this.projectionMatrixPtr = gl.getUniformLocation(program.glProgram, shaderClass.projectionMatrixName);
+
+        console.log("normal buffer: " + this.normalPtr);
 
         gl.enableVertexAttribArray(this.vertexPositionBufferPtr);
     }
@@ -25,34 +31,37 @@ class DrawShader extends Shader {
     {
         gl.bindBuffer(glBuffer.bufferType, glBuffer);
         gl.bufferData(glBuffer.bufferType, glBuffer.data, gl.STATIC_DRAW)
-        gl.bindBuffer(glBuffer.bufferType, glBuffer);
         gl.vertexAttribPointer(this.vertexPositionBufferPtr, glBuffer.itemSize, gl.FLOAT, false, 0, 0);
     }
 
-    setViewModelMatrix(mat4)
+    setWorldMatrix(mat4) {
+        gl.uniformMatrix4fv(this.worldMatrixPtr, false, mat4);
+    }
+
+    setViewMatrix(mat4)
     {
-        gl.uniformMatrix4fv(this.viewModelMatrixPtr, false, mat4);
+        gl.uniformMatrix4fv(this.viewMatrixPtr, false, mat4);
     }
      
     setProjectionMatrix(mat4) {
         gl.uniformMatrix4fv(this.projectionMatrixPtr, false, mat4);
     }
 
+    setNormals(glBuffer) {
+        gl.bindBuffer(glBuffer.bufferType, glBuffer);
+        gl.bufferData(glBuffer.bufferType, glBuffer.data, gl.STATIC_DRAW)
+        gl.vertexAttribPointer(this.normalPtr, 3, gl.FLOAT, gl.TRUE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
+    }
 
     draw(vertexBuffer) {
         var glBuffers = vertexBuffer.getBuffers();
         var renderOptions = vertexBuffer.getRenderOptions();
-        if (glBuffers[1] != undefined) {
-            gl.bindBuffer(glBuffers[1].bufferType, glBuffers[1]);
-            gl.drawElements(renderOptions.drawShape, glBuffers[1].numItems, gl.UNSIGNED_SHORT, 0);
+        if (vertexBuffer.usesIndecies()) {
+            gl.bindBuffer(glBuffers[2].bufferType, glBuffers[2]);
+            gl.drawElements(renderOptions.drawShape, glBuffers[2].numItems, gl.UNSIGNED_SHORT, 0);
         } else {
-            gl.drawArrays(renderOptions.drawShape, 0, glBuffers[0].numItems);
+            gl.drawArrays(renderOptions.drawShape, 0, glBuffers[1].numItems);
         }
-    }
-
-    dontCallMe() {
-        gl.enableVertexAttribArray("don't call me ");
-        gl.glDisableVertexAttribArray("don't call me ");
     }
 
 }

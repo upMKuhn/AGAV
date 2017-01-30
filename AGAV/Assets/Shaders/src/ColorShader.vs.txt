@@ -1,12 +1,16 @@
 ﻿attribute vec3 aVertexPosition;
 attribute vec4 aVertexColor;
+attribute vec3 aNormal;
 
-uniform mat4 uViewModelMatrix;
+uniform mat4 uViewMatrix;
+uniform mat4 uWorldMatrix;
 uniform mat4 uProjectionMatrix;
 
 varying vec4 vColor;
+varying vec3 vNormal;
 
 void main() {
-	gl_Position = uProjectionMatrix * uViewModelMatrix * vec4(aVertexPosition, 1.0);
+	gl_Position = uProjectionMatrix * uViewMatrix  * uWorldMatrix * vec4(aVertexPosition, 1.0);
 	vColor = aVertexColor;  
+	vNormal = aNormal;  
 } 

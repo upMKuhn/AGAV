@@ -2,7 +2,7 @@
 
     constructor(data)
     {
-        this.normals = null;
+        this.normals = {};
         this.positionBuffer = null;
         this.indexBuffer = null;
         this.RenderOptions = null;
@@ -10,11 +10,11 @@
 
         this.glVertexBuffer = gl.createBuffer();
         this.glIndexBuffer = gl.createBuffer();
+        this.glNormalBuffer = gl.createBuffer();
         this.debugger = new DebuggerNullObject();
 
         this.dimensions = Factory("ModelDimension", [0, 0, 0, [0,0,0], [0,0,0]]);
 
-        
 
 
         this.model = data;
@@ -34,8 +34,8 @@
 
     applyToShader(drawShader) {
         var glBuffers = this.getBuffers();
-        drawShader.bindPositionBuffer(glBuffers[0]);
-        //drawShader.setNormals(glBuffers[0]);
+        drawShader.bindPositionBuffer(glBuffers[1]);
+        drawShader.setNormals(glBuffers[0]);
     }
 
     getBuffers()
@@ -45,7 +45,8 @@
         this.debugger.onRenderCallMe();
         if (this.positionBuffer.array.length > 0) {
             this.__makeBuffers(this.glVertexBuffer, this.positionBuffer, gl.ARRAY_BUFFER, "Float32Array");
-            buffers.push(this.glVertexBuffer)
+            this.__makeBuffers(this.glNormalBuffer, this.normals, gl.ARRAY_BUFFER, "Float32Array");
+            buffers.push(this.glNormalBuffer, this.glVertexBuffer)
         }
 
         if (this.indexBuffer.array.length > 0 && buffers.length > 0){
@@ -62,7 +63,10 @@
             this.indexBuffer = model.indices;
             this.RenderOptions = model.RenderOptions;
             this.RenderOptions.drawShape = WebGlDataTypeFactory.Enum(this.RenderOptions.drawShape);
-            this.normals = model.normals;
+            this.normals = {
+                array: model.normals,
+                itemSize: 3,
+            }
             this.__generateNormals();
             this.__setupVertexDebugger();
             this.__updateDimensions();
@@ -115,21 +119,26 @@
     }
 
     __generateNormals() {
-        if (this.normals != undefined) {
+        if (this.normals.array != undefined) {
             return;
         } else if (this.indexBuffer == undefined || this.indexBuffer.array == undefined || this.indexBuffer.length == 0) {
             this.__generateNormalsFromVertex();
+        } else {
+            this.__generateNormalsFromIndecies();
         }
+        this.normals.itemSize = 3;
+    }
 
+    __generateNormalsFromIndecies() {
         var faces = this.indexBuffer.array;
         var vertecies = this.positionBuffer.array;
-        var p1,p2,p3
-        this.normals = [];
+        var normals = [];
+        var p1, p2, p3
 
         for (var i = 0; i < faces.length; i += 3) {
-            p1 = vec3.create([vertecies[faces[i+0]], vertecies[faces[i+0] + 1], vertecies[faces[i+0] + 2]])
-            p2 = vec3.create([vertecies[faces[i+1]], vertecies[faces[i+1] + 1], vertecies[faces[i+1] + 2]])
-            p3 = vec3.create([vertecies[faces[i+2]], vertecies[faces[i+2] + 1], vertecies[faces[i+2] + 2]])
+            p1 = vec3.create([vertecies[faces[i + 0]], vertecies[faces[i + 0] + 1], vertecies[faces[i + 0] + 2]])
+            p2 = vec3.create([vertecies[faces[i + 1]], vertecies[faces[i + 1] + 1], vertecies[faces[i + 1] + 2]])
+            p3 = vec3.create([vertecies[faces[i + 2]], vertecies[faces[i + 2] + 1], vertecies[faces[i + 2] + 2]])
 
             vec3.subtract(p2, p1, p2);
             vec3.subtract(p3, p1, p3);
@@ -139,17 +148,16 @@
 
             var length = Math.sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
 
-            this.normals.push(p1[0] / length);
-            this.normals.push(p1[1] / length);
-            this.normals.push(p1[2] / length);
+            normals.push(p1[0] / length);
+            normals.push(p1[1] / length);
+            normals.push(p1[2] / length);
         }
+        this.normals.array = normals;
     }
 
     __generateNormalsFromVertex() {
-        if (this.normals != undefined) {
-            return;
-        } 
         var vertecies = this.positionBuffer.array;
+        var normals = [];
         var p1, p2, p3;
 
         for (var i = 0; i < vertecies.length; i += 9) {
@@ -169,10 +177,11 @@
             p1[1] = p1[2] / length;
             p1[2] = p1[2] / length;
 
-            this.normals.push(p1[0] != NaN ? p1[0] : 0);
-            this.normals.push(p1[1] != NaN ? p1[1] : 0);
-            this.normals.push(p1[2] != NaN ? p1[2] : 0);
+            normals.push(p1[0] != NaN ? p1[0] : 0);
+            normals.push(p1[1] != NaN ? p1[1] : 0);
+            normals.push(p1[2] != NaN ? p1[2] : 0);
         }
+        this.normals.array = normals;
     }
 
     __updateDimensions()
