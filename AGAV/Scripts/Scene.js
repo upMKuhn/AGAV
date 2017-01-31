@@ -15,7 +15,7 @@ class main {
         this.assetLoadQueue = new AssetLoadQueue(makeCallback(this, this.onSuccessfullLoadedAssets),
                                                 makeCallback(this, this.onUnssucefullLoadedAssets));
 
-        this.camera = new Camera(0, 0, -30, 1, 2, 0, 6);
+        this.camera = new Camera(0, 0, -30, 0, 0, 0, 6);
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
         this.scene = new Foundation(this.camera);
 

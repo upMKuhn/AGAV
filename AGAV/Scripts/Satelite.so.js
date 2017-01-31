@@ -5,12 +5,12 @@ class Satelite extends SceneObject{
     constructor(name, modelName, myCanvas, worldCoords)
     {
         super(name, modelName, worldCoords);
-        this.radius = 10;
+        this.radius = -2.5;
         this.angle = 1.6;
         this.orbitSpeed = -0.01;
         this.MaxOrbitSpeed = 0.5;
-        this.MinRadius = 7.5;
-        this.MaxRadius = 30;
+        this.MinRadius = -2.5;
+        this.MaxRadius = 7.5;
 
 
         myCanvas.subscribeOnKeyDown('ArrowDown', makeCallback(this, this.reduceSpeed));

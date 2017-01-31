@@ -5,8 +5,8 @@ varying vec3 vNormal;
 void main() {
 	vec3 normal = normalize(vNormal);
 	vec3 ambientLightStrength = vec3(0.2, 0.2, 0.2);
-	vec3 sunLightStrength = vec3(0.9, 0.9, 0.9);
-	vec3 sunDirection = normalize(vec3(1.0, 1, 1.0471975511965976));
+	vec3 sunLightStrength = vec3(0.82, 0.75, 0.75);
+	vec3 sunDirection = normalize(vec3(1.0, 0.4, 1.0471975511965976));
 	vec3 lightStrength = ambientLightStrength + sunLightStrength * max(dot(vNormal, sunDirection), 0.0);
 
 	gl_FragColor = vec4(vColor.rgb * lightStrength, 1);
