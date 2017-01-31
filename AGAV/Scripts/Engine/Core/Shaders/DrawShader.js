@@ -22,16 +22,16 @@ class DrawShader extends Shader {
         this.projectionMatrixPtr = gl.getUniformLocation(program.glProgram, shaderClass.projectionMatrixName);
 
         console.log("normal buffer: " + this.normalPtr);
-
-        gl.enableVertexAttribArray(this.vertexPositionBufferPtr);
     }
 
 
     bindPositionBuffer(glBuffer)
     {
+        gl.enableVertexAttribArray(this.vertexPositionBufferPtr);
         gl.bindBuffer(glBuffer.bufferType, glBuffer);
         gl.bufferData(glBuffer.bufferType, glBuffer.data, gl.STATIC_DRAW)
         gl.vertexAttribPointer(this.vertexPositionBufferPtr, glBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
     }
 
     setWorldMatrix(mat4) {
@@ -48,6 +48,7 @@ class DrawShader extends Shader {
     }
 
     setNormals(glBuffer) {
+        gl.enableVertexAttribArray(this.normalPtr);
         gl.bindBuffer(glBuffer.bufferType, glBuffer);
         gl.bufferData(glBuffer.bufferType, glBuffer.data, gl.STATIC_DRAW)
         gl.vertexAttribPointer(this.normalPtr, 3, gl.FLOAT, gl.TRUE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);

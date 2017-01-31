@@ -100,7 +100,6 @@
     <Content Include="Scripts\Engine\IO\AssetLoader.js" />
     <Content Include="Scripts\Satelite.so.js" />
     <Content Include="Scripts\Earth.so.js" />
-    <Content Include="Scripts\Engine\Camera\FPSCameraControl.js" />
     <Content Include="Scripts\Engine\Camera\CameraControl.js" />
     <Content Include="Scripts\Engine\Core\Buffers\Debugger\DebuggerNullObject.js" />
     <Content Include="Scripts\Engine\Core\Buffers\ColorBuffer.js" />

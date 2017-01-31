@@ -48,8 +48,8 @@ class main {
         gl.clearColor(0, 0, 0, 1.0);
         gl.enable(gl.DEPTH_TEST);
 
-        //this.scene.addSceneObject(new Earth("Earth", "sphere"));
-        this.scene.addSceneObject(new Earth("Earth2", "Earth"));
+        this.scene.addSceneObject(new Earth("Earth", "sphere"));
+        //this.scene.addSceneObject(new Earth("Earth2", "Earth"));
 
 
         this.scene.addSceneObject(new Satelite("SatCom1", "SateliteModel", this.myCanvas));
