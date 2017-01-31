@@ -1,11 +1,12 @@
 ﻿class Camera {
-    constructor(x, y, z, pitch, heading, roll, minZoom)
+    constructor(x, y, z, pitch, heading, roll, minZoom, maxZoom)
     {
         this.x = x;
         this.y = y;
         this.z = z;
 
         this.minZoom = getOrDefault(minZoom, 0);
+        this.maxZoom = getOrDefault(maxZoom, 65);
 
         this.pitch = pitch;
         this.heading = heading;
@@ -64,12 +65,13 @@
     moveForward() {
         if (Math.abs(this.z) <= this.minZoom)
             return;
-        this.z += this.moveSpeed * 30;
+        this.z += this.moveSpeed * 60;
     }
 
     moveBackward() {
-        console.log("X: " + this.x + " Y:" + this.y + " Z" + this.z);
-        this.z -= this.moveSpeed * 30;
+        if (Math.abs(this.z) >= this.maxZoom)
+            return;
+        this.z -= this.moveSpeed * 60;
     }
 
     getViewMatrix() {

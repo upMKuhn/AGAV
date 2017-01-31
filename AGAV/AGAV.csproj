@@ -84,6 +84,7 @@
     <Content Include="Assets\Shaders\2DColorProgram.json" />
     <Content Include="Assets\Shaders\TextureProgram.json" />
     <Content Include="Assets\Shaders\LightShader.json" />
+    <Content Include="Assets\Objects\cube.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -10,7 +10,7 @@ class Satelite extends SceneObject{
         this.orbitSpeed = -0.01;
         this.MaxOrbitSpeed = 0.5;
         this.MinRadius = -2.5;
-        this.MaxRadius = 7.5;
+        this.MaxRadius = 15;
 
 
         myCanvas.subscribeOnKeyDown('ArrowDown', makeCallback(this, this.reduceSpeed));

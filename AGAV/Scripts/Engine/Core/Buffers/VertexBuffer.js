@@ -121,7 +121,7 @@
     __generateNormals() {
         if (this.normals.array != undefined) {
             return;
-        } else if (this.indexBuffer == undefined || this.indexBuffer.array == undefined || this.indexBuffer.length == 0) {
+        } else if (this.indexBuffer == undefined || this.indexBuffer.array == undefined || (this.indexBuffer.array != undefined && this.indexBuffer.array.length == 0)) {
             this.__generateNormalsFromVertex();
         } else {
             this.__generateNormalsFromIndecies();
@@ -177,9 +177,15 @@
             p1[1] = p1[2] / length;
             p1[2] = p1[2] / length;
 
-            normals.push(p1[0] != NaN ? p1[0] : 0);
-            normals.push(p1[1] != NaN ? p1[1] : 0);
-            normals.push(p1[2] != NaN ? p1[2] : 0);
+            normals.push(!isNaN(p1[0]) ? p1[0] : 0);
+            normals.push(!isNaN(p1[1]) ? p1[1] : 0);
+            normals.push(!isNaN(p1[2]) ? p1[2] : 0);
+            normals.push(!isNaN(p1[0]) ? p1[0] : 0);
+            normals.push(!isNaN(p1[1]) ? p1[1] : 0);
+            normals.push(!isNaN(p1[2]) ? p1[2] : 0);
+            normals.push(!isNaN(p1[0]) ? p1[0] : 0);
+            normals.push(!isNaN(p1[1]) ? p1[1] : 0);
+            normals.push(!isNaN(p1[2]) ? p1[2] : 0);
         }
         this.normals.array = normals;
     }

@@ -26,6 +26,7 @@ class main {
         this.assetLoader.loadProgram("Assets/Shaders/TextureProgram.json");
         this.assetLoader.loadModel("Assets/Objects/Satelite.json");
         this.assetLoader.loadModel("Assets/Objects/earth.json");
+        this.assetLoader.loadModel("Assets/Objects/cube.json");
 
 
         var sp = new Sphere("sphere", 5, 20, 50);
@@ -53,6 +54,7 @@ class main {
 
 
         this.scene.addSceneObject(new Satelite("SatCom1", "SateliteModel", this.myCanvas));
+        //this.scene.addSceneObject(new SceneObject("cube", "CubeModel"));
 
         setInterval(makeCallback(this.scene, this.scene.renderScene), 50);
     }
