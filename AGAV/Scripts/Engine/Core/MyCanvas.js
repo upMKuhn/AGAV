@@ -19,7 +19,8 @@
         this.$canvas.mousemove(makeCallback(InputClass, InputClass.onMouseMove));
         this.$canvas.mousedown(makeCallback(InputClass, InputClass.onMouseDown));
         this.$canvas.mouseup(makeCallback(InputClass, InputClass.onMouseUp));
-        $(document).bind("mousewheel", makeCallback(this, this.__onMouseWheelScroll));
+        $(document.body).bind("mousewheel", makeCallback(this, this.__onMouseWheelScroll));
+        $(document.body).bind("MozMousePixelScroll", makeCallback(this, this.__onMouseWheelScrollFirefox)); //Mozilla does not recognize mousewheel 
 
         this.__onWindowResize();
         $(window).resize(makeCallback(this, this.__onWindowResize));
@@ -86,6 +87,14 @@
 
     __onMouseWheelScroll(eventArg) {
         if (eventArg.originalEvent.wheelDelta < 0) {
+            this.mouseWheelDownSubscriber.raise();
+        } else {
+            this.mouseWheelUpSubscriber.raise();
+        }
+    }
+
+    __onMouseWheelScrollFirefox(eventArg) {
+        if (eventArg.originalEvent.detail > 0) {
             this.mouseWheelDownSubscriber.raise();
         } else {
             this.mouseWheelUpSubscriber.raise();
