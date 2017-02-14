@@ -55,7 +55,7 @@ class MyCanvas
 
     hasFocus() { return this.canvasFocused; }
 
-//beter function name should be private_ConvertWindowCordsToCanvasCords
+//wraps around a function
     __WrapWithCoordinateConversion(callback) {
         var warpper = function (pageX, pageY)
         {
