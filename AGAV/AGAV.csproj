@@ -99,6 +99,8 @@
     <Content Include="Scripts\Engine\Core\ModelDimension.js" />
     <Content Include="Scripts\Engine\Core\Physics\CollisionBox.js" />
     <Content Include="Scripts\Engine\IO\AssetLoader.js" />
+    <Content Include="Scripts\Engine\IO\MockServer.js" />
+    <Content Include="Scripts\Engine\IO\Server.js" />
     <Content Include="Scripts\Satelite.so.js" />
     <Content Include="Scripts\Earth.so.js" />
     <Content Include="Scripts\Engine\Camera\CameraControl.js" />

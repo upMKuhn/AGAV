@@ -1,9 +1,10 @@
 ﻿/// <reference path="TextureLoadQueueItem.js" />
 /// <reference path="../Core/Buffers/TextureBuffer.js" />
 class AssetLoader {
-    constructor(assetLoadQueue, foundationObj, onDoneCallback)
+    constructor(assetLoadQueue, foundationObj, serverApi,onDoneCallback)
     {
         this.assetLoadQueue = assetLoadQueue;
+        this.serverApi = serverApi;
         this.onDoneCallback = getOrDefault(onDoneCallback, function () { });
         this.foundation = foundationObj;
         this.shaderProgamsToBeLinked = 0;
@@ -29,7 +30,12 @@ class AssetLoader {
             filePaths = [filePaths];
 
         for (var i = 0; i < filePaths.length; i++) {
-            var queueItem = Factory("AssetLoadQueueItem", [filePaths[i], makeCallback(this, this.__onModelLoaded)]);
+            var queueItem = Factory(
+                "AssetLoadQueueItem",[
+                    filePaths[i],
+                    makeCallback(this, this.__onModelLoaded),
+                    this.serverApi
+                ]);
             this.assetLoadQueue.enqueue(queueItem)
         }
     }
@@ -54,7 +60,7 @@ class AssetLoader {
     {
         if (buffer instanceof TextureBuffer) {
             var src = buffer.src
-            var queueItem = Factory("TextureLoadQueueItem", [src, makeCallback(buffer, buffer.setImage)]);
+            var queueItem = Factory("TextureLoadQueueItem", [src, makeCallback(buffer, buffer.setImage), this.serverApi]);
             this.assetLoadQueue.enqueue(queueItem);
         }
     }
@@ -65,7 +71,7 @@ class AssetLoader {
             filePaths = [filePaths];
 
         for (var i = 0; i < filePaths.length; i++) {
-            var queueItem = Factory("AssetLoadQueueItem", [filePaths[i], makeCallback(this, this.__onProgramLoaded)]);
+            var queueItem = Factory("AssetLoadQueueItem", [filePaths[i], makeCallback(this, this.__onProgramLoaded), this.serverApi]);
             this.assetLoadQueue.enqueue(queueItem)
         }
     }
@@ -85,8 +91,8 @@ class AssetLoader {
         shaderProgram.subscripeOnProgramLinked(makeCallback(vertexShader, vertexShader.onProgramLinked));
 
         //now that we have the model we quickly fetch the source code as well. 
-        var vertexQueueItem = Factory("AssetLoadQueueItem", [vertexShaderModel.src, makeCallback(vertexShader, vertexShader.setSourceCodeAndCompile)]);
-        var fragmentQueueItem = Factory("AssetLoadQueueItem", [fragShaderModel.src, makeCallback(fragShader, fragShader.setSourceCodeAndCompile)]);
+        var vertexQueueItem = Factory("AssetLoadQueueItem", [vertexShaderModel.src, makeCallback(vertexShader, vertexShader.setSourceCodeAndCompile), this.serverApi]);
+        var fragmentQueueItem = Factory("AssetLoadQueueItem", [fragShaderModel.src, makeCallback(fragShader, fragShader.setSourceCodeAndCompile), this.serverApi]);
         this.assetLoadQueue.enqueue(vertexQueueItem);
         this.assetLoadQueue.enqueue(fragmentQueueItem);
 

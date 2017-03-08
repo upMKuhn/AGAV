@@ -19,14 +19,14 @@ class main {
         this.camerControl = new CameraControl(this.camera, this.myCanvas);
         this.scene = new Foundation(this.camera);
 
-        this.assetLoader = new AssetLoader(this.assetLoadQueue, this.scene);
+        this.assetLoader = new AssetLoader(this.assetLoadQueue, this.scene, new MockServer());
 
         this.assetLoader.loadProgram("Assets/Shaders/2DColorProgram.json");
         this.assetLoader.loadProgram("Assets/Shaders/ColorProgram.json");
         this.assetLoader.loadProgram("Assets/Shaders/TextureProgram.json");
         this.assetLoader.loadModel("Assets/Objects/Satelite.json");
-        this.assetLoader.loadModel("Assets/Objects/earth.json");
-        this.assetLoader.loadModel("Assets/Objects/cube.json");
+        //this.assetLoader.loadModel("Assets/Objects/earth.json");
+        //this.assetLoader.loadModel("Assets/Objects/cube.json");
 
 
         var sp = new Sphere("sphere", 5, 20, 50);

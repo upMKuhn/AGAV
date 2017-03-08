@@ -1,9 +1,10 @@
 ﻿class AssetLoadQueueItem{
-    constructor(filePath, onSuccess) {
+    constructor(filePath, onSuccess, serverApi) {
         this.filePath = filePath;
         this.done = false;
         this.error = false;
         this.loading = false;
+        this.serverApi = serverApi;
         this.onSuccess = onSuccess;
     }
 
@@ -15,12 +16,13 @@
         if (typeof this.filePath != "string")
             return this.onAssetLoadError("Invalid filepath.... must be of type string");
         var this_ = this;
-        $.ajax({
-            url: this.filePath,
-            cache: false,
-            success: makeCallback(this, this.__onLoadSuccess),
-            error: makeCallback(this, this.onAssetLoadError)
-        });
+
+        this.serverApi.get(
+            this.filePath,
+            makeCallback(this, this.__onLoadSuccess,
+            makeCallback(this, this.onAssetLoadError))
+        );
+        
         this.loading = true;
     }
 

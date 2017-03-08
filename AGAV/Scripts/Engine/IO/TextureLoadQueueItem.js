@@ -10,7 +10,7 @@ class TextureLoadQueueItem extends AssetLoadQueueItem{
         if (typeof this.filePath != "string")
             return this.onAssetLoadError("Invalid filepath.... must be of type string");
 
-        this.$img = $('<img id="dynamic">')
+        this.$img = $('<img/>');
         this.$img.hide();
         this.$img.on('load', makeCallback(this, this.__onLoaded));
         this.$img.attr('src', this.filePath);
